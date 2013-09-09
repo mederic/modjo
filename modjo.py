@@ -1,7 +1,7 @@
 #! /usr/bin/python
 
+import argparse
 import sys
-import getopt
 from core import model
 
 
@@ -17,59 +17,26 @@ print("");
 print("Version 1.0")
 print("----------------------------------------------------");
 
-def usage():
-    print("Usage: modjo -m <model> -t <template> -o <output>")
-    print()
-    print("Options:")    
-    print("   -m | --model     : path to the file describing the model");
-    print("   -t | --template  : path to the file describing the template");
-    print("   -o | --output    : path to the directory where result file(s) will be created");
-    print("   -d | --debug     : print debug informations")
-    print("   -c | --check     : validate (or not) a template and/or a model") 
+parser = argparse.ArgumentParser(description='Modjo - model generator')
+parser.add_argument('-m', '--model', action="store", dest="modelPath", default=None, help='path to the file describing the model')
+parser.add_argument('-t', '--template', action="store", dest="templatePath", default=None, help='path to the file describing the templat')
+parser.add_argument('-o', '--output', action="store", dest="outputPath", default=None, help='path to the directory where result file(s) will be created')
+parser.add_argument('-d', '--debug', action="store_true", dest="debug", help='print debug informations')
+parser.add_argument('-c', '--check', action="store_true", dest="checkMode", help='validate (or not) a template and/or a model')
+   
+args = parser.parse_args()   
 
-try:
-    opts, args = getopt.getopt(sys.argv[1:], "m:t:o:dhc", ["model=", "template=", "output=", "debug", "help", "check"])
-except getopt.GetoptError as err:
-    print(err) 
-    usage()
-    sys.exit(2)
-
-modelPath = None
-templatePath = None
-outputPath = None
-debug = False
-checkMode = False
-
-for o, a in opts:
-    if o in ("-m", "--model"):
-        modelPath = a
-    elif o in ("-t", "--template"):
-        templatePath = a
-    elif o in ("-o", "--output"):
-        outputPath = a
-    elif o in ("-debug", "--debug"):
-        debug = True
-    elif o in ("-c", "--check"):
-        checkMode = True
-    elif o in ("-h", "--help"):
-        usage()
-        sys.exit()
-        output = a
-    else:
-        print("Option {} unknown".format(o))
-        sys.exit(2)
-
-if not checkMode:
-    if modelPath is None:
+if not args.checkMode:
+    if args.modelPath is None:
         print("Path to the model is missing (option -m)")
         sys.exit(2)
-    if templatePath is None:
+    if args.templatePath is None:
         print("Path to the template is missing (option -t)")
         sys.exit(2)
 
 
-if not modelPath is None:
+if not args.modelPath is None:
     try:
-        modelDefinition = model.ModelDefinition(modelPath)
+        modelDefinition = model.ModelDefinition(args.modelPath)
     except model.XMLParseError:
         print "File specified in " + modelPath + " is not a valid xml file." 

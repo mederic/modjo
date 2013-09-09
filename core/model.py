@@ -1,9 +1,6 @@
 import xml.etree.ElementTree as ET
 
 class ModelDefinition:
-
-    filePath = None
-    models = None
     
     def __init__(self, filePath):
         self.filePath = filePath
@@ -20,9 +17,6 @@ class ModelDefinition:
         
     
 class Model:
-
-    name = None
-    properties = None
     
     def __init__(self, xml_model):
         self.name = xml_model.get('name')
@@ -30,18 +24,16 @@ class Model:
         for xml_property in xml_model.iter('property'):
             self.properties.append(Property(xml_property))
 
-class Property:
 
-    name = None
-    dataType = None    
+class Property:
     
     def __init__(self, xml_property):
         self.name = xml_property.get('name')
-        self.dataType = xml_property.get('type')
-        
-    
+        self.dataType = xml_property.get('type')        
+
 
 class XMLParseError(Exception):
+
     def __init__(self, filePath):
         self.filePath = filePath
      
