@@ -1,7 +1,10 @@
-#! /usr/local/bin/python3.3
+#! /usr/bin/python
 
 import sys
 import getopt
+from core import model
+
+
 print("\n\
                       _  _       \n\
       /\/\   ___   __| |(_) ___  \n\
@@ -64,3 +67,9 @@ if not checkMode:
         print("Path to the template is missing (option -t)")
         sys.exit(2)
 
+
+if not modelPath is None:
+    try:
+        modelDefinition = model.ModelDefinition(modelPath)
+    except model.XMLParseError:
+        print "File specified in " + modelPath + " is not a valid xml file." 
