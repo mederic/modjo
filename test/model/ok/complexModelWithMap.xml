@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root model-name="simple model #1">
+	<models>
+		<model name="person">
+			<property type="string" name="firstname"/>
+			<property type="string" name="lastname"/>
+			<property type="date" name="birthdate"/>
+		</model>
+		<model name="location">
+			<property type="double" name="latitude"/>
+			<property type="double" name="longitude"/>
+		</model>
+		<model name="shop">
+			<property type="person" name="owner"/>
+			<property type="person[]" name="employees"/>
+			<property type="person[]" name="customers"/>
+		</model>
+		<model name="company">
+			<property type="person" name="ceo"/>			
+			<!-- location to shop map (java <=> Map<Location, Shop>) -->
+			<property type="shop[location]" name="shops"/>
+		</model>
+	</models>
+</root>
