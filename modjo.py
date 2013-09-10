@@ -3,6 +3,8 @@
 import argparse
 import sys
 from core.src import model
+from core.src.error import *
+
 
 
 print("\n\
@@ -19,7 +21,7 @@ print("----------------------------------------------------");
 
 parser = argparse.ArgumentParser(description='Modjo - model generator')
 parser.add_argument('-m', '--model', action="store", dest="modelPath", default=None, help='path to the file describing the model')
-parser.add_argument('-t', '--template', action="store", dest="templatePath", default=None, help='path to the file describing the templat')
+parser.add_argument('-t', '--template', action="store", dest="templatePath", default=None, help='path to the folder container files describing the template')
 parser.add_argument('-o', '--output', action="store", dest="outputPath", default=None, help='path to the directory where result file(s) will be created')
 parser.add_argument('-d', '--debug', action="store_true", dest="debug", help='print debug informations')
 parser.add_argument('-c', '--check', action="store_true", dest="checkMode", help='validate (or not) a template and/or a model')
@@ -38,7 +40,9 @@ if not args.checkMode:
 if not args.modelPath is None:
     try:
         modelDefinition = model.ModelDefinition(args.modelPath)
+    except ModjoSyntaxError as modjoSynError:
+        print "Incorrect model file: " + modjoSynError.reason
     except IOError:
         print "File does not exist..."
     except model.XMLParseError:
-        print "File specified in " + modelPath + " is not a valid xml file."
+        print "File specified in " + args.modelPath + " is not a valid xml file."

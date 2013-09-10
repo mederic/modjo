@@ -1,0 +1,6 @@
+Model name: {{model.name}}
+--------------------------
+Properties:
+% for property in model.properties:
+    {{property.name}} <{{property.dataType}}>
+% end

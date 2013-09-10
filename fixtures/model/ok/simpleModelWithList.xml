@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<root model-name="simple model #1">
+<root model-name="simple model #2">
 	<models>
 		<model name="location">
 			<property type="double" name="latitude"/>
