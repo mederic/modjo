@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<root model-name="simple template #1">
-	<templates>
-	   <template target="model" src="model.tmpl.text">
-	       <ouput name="{{model}}.text" />
-	   </template>
-	</templates>
-</root>

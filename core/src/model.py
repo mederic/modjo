@@ -14,7 +14,7 @@ class ModelDefinition:
             self.models = []
             for xml_model in models_root.iter('model'):
                 self.models.append(Model(xml_model))
-                
+
             if not self.models:
                 raise ModjoSyntaxError("No model found.")
         except ET.ParseError:
