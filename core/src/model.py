@@ -40,7 +40,7 @@ class Property:
         self.name = xml_property.get('name')
         if self.name is None:
             raise ModjoSyntaxError("Property defined without a name.")
-            
+
         self.dataType = xml_property.get('type')
         if self.dataType is None:
             raise ModjoSyntaxError("Property defined without a type.")

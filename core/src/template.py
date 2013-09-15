@@ -11,14 +11,14 @@ class TemplateDefinition:
             root = tree.getroot()
             templates_root = root.find('templates')
 
-            self.subtemplates= []
+            self.subtemplates = []
             for xml_subtemplate in templates_root.iter('template'):
-                self.subtemplates.append(Template(xml_subtemplate))
+                self.subtemplates.append(Template(xml_subtemplate, self))
 
             if not self.subtemplates:
                 raise ModjoSyntaxError("No templates found.")
         except ET.ParseError:
-            raise XMLParseError(filePath)
+            raise ModjoTemplateError("Incorrect modjoManifest.xml.")
         except IOError:
             raise ModjoTemplateError("No modjoManifest.xml found.")
         except AttributeError:
@@ -27,17 +27,19 @@ class TemplateDefinition:
 
 class Template:
 
-    def __init__(self, xml_subtemplate):
-        self.target = xml_subtemplate.get('target') 
-
+    def __init__(self, xml_subtemplate, templateDefinition):
+        self.target = xml_subtemplate.get('target')
+        self.templateDefinition = templateDefinition
         self.outputs = []
         for xml_output in xml_subtemplate.iter('output'):
-            self.outputs.append(TemplateOutput(xml_output))
+            self.outputs.append(TemplateOutput(xml_output, self))
 
 
 class TemplateOutput:
 
-    def __init__(self, xml_output):
+    def __init__(self, xml_output, template):
+        self.template = template
+        folder = template.templateDefinition.folderPath
         self.name = xml_output.get('name')
-        self.src= xml_output.get('src')
+        self.src = folder + "/" + xml_output.get('src')
 
