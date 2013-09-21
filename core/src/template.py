@@ -104,6 +104,7 @@ class Template:
 
     def __init__(self, xml_subtemplate, templateDefinition):
         self.target = xml_subtemplate.get('target')
+        self.output_dir = xml_subtemplate.get('dir')
         self.templateDefinition = templateDefinition
         self.outputs = []
         for xml_output in xml_subtemplate.iter('output'):
@@ -116,5 +117,11 @@ class TemplateOutput:
         self.template = template
         folder = template.templateDefinition.folderPath
         self.name = xml_output.get('name')
+
+        self.output_dir = template.output_dir
+        sub_dir = xml_output.get('dir')
+        if not sub_dir is None:
+            self.output_dir += "/" + sub_dir
+
         self.src = folder + "/" + xml_output.get('src')
         self.equivalences = self.template.templateDefinition.equivalences

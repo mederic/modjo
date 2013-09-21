@@ -27,7 +27,7 @@
         </equivalence>
     </equivalences>
     <templates>
-        <template target="model">
+        <template target="model" dir="model">
 	    <output name="{{Model}}.java" src="model.tmpl.txt"/>
 	</template>
     </templates>

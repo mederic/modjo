@@ -21,7 +21,13 @@ class Generator:
 
         for sub_generator in self.template_generator:
             for output in sub_generator.outputs:
-                output_dest = dest + "/" + output.name
+                output_dest = dest + "/" 
+                if not output.output_dir is None:
+                   output_dest += output.output_dir + "/"
+                   if not os.path.exists(output_dest):
+                        os.makedirs(output_dest)
+
+                output_dest += output.name
                 f = open(output_dest, 'w')
                 f.write(output.content)
                 f.close()
@@ -47,5 +53,9 @@ class ModelOutput:
         content = content_tpl.render(model=model,equ=output.equivalences)
         tpl_file.close()
 
+        output_dir_tpl = SimpleTemplate(output.output_dir)
+        output_dir = output_dir_tpl.render(model=model.name, Model=model.Name)
+
+        self.output_dir = output_dir
         self.name = filename
         self.content = content
