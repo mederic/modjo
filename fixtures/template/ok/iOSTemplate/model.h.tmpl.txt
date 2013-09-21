@@ -1,0 +1,17 @@
+#import <Foundation/Foundation.h>
+% for dependancy in model.depending_models:
+import "{{dependancy.Name}}.h"
+% end
+
+@interface {{model.Name}} : NSObject {
+% for property in model.properties:
+	{{equ.convert('ios', property.dataType)}}{{property.name}};
+% end
+}
+
+% for property in model.properties:
+{{equ.convert('ios-property', property.dataType)}}{{property.name}};
+% end
+
+@end
+

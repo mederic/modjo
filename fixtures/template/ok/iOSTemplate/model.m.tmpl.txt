@@ -1,0 +1,10 @@
+import "{{model.Name}}.h"
+
+@implementation {{model.Name}}
+% for property in model.properties:
+@synthesize {{property.name}};
+% end
+
+@end
+
+

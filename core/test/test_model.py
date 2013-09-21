@@ -26,6 +26,61 @@ class SimpleModelTestCase(unittest.TestCase):
         except XMLParseError:
             self.fail("Unexpected exception when parsing model")
 
+    def testSimpleModelWithList(self):
+        try:
+            modelDefinition = ModelDefinition("fixtures/model/ok/simpleModelWithList.xml")
+            self.assertEqual(len(modelDefinition.models), 3)
+
+            locationModel = modelDefinition.models[2]
+            self.assertEqual(locationModel.name, "trips")
+            self.assertEqual(len(locationModel.properties), 1)
+
+            locationsProperty = locationModel.properties[0]
+            self.assertEqual(locationsProperty.dataType, "trip[]")
+            self.assertEqual(locationsProperty.name, "locations")
+        except IOError:
+            self.fail("Fixture file does not exist...")
+        except XMLParseError:
+            self.fail("Unexpected exception when parsing model")
+
+    def testSimpleModelWithMap(self):
+        try:
+            modelDefinition = ModelDefinition("fixtures/model/ok/simpleModelWithMap.xml")
+            self.assertEqual(len(modelDefinition.models), 2)
+
+            countryModel = modelDefinition.models[1]
+            self.assertEqual(countryModel.name, "country")
+            self.assertEqual(len(countryModel.properties), 1)
+
+            citiesProperty = countryModel.properties[0]
+            self.assertEqual(citiesProperty.dataType, "location[string]")
+            self.assertEqual(citiesProperty.name, "cities")
+        except IOError:
+            self.fail("Fixture file does not exist...")
+        except XMLParseError:
+            self.fail("Unexpected exception when parsing model")
+
+
+class ComplexModelTestCase(unittest.TestCase):
+
+    def testComplexModel(self):
+        try:
+            modelDefinition = ModelDefinition("fixtures/model/ok/complexModel.xml")
+            self.assertEqual(len(modelDefinition.models), 4)
+
+            shopModel = modelDefinition.models[3]
+            self.assertEqual(shopModel.name, "shop")
+            self.assertEqual(len(shopModel.properties), 2)
+
+            placeProperty = shopModel.properties[0]
+            self.assertEqual(placeProperty.dataType, "place")
+            self.assertEqual(placeProperty.name, "place")
+        except IOError:
+            self.fail("Fixture file does not exist...")
+        except XMLParseError:
+            self.fail("Unexpected exception when parsing model")
+
+
 
 class WrongModelTestCase(unittest.TestCase):
 
@@ -89,6 +144,14 @@ class WrongModelTestCase(unittest.TestCase):
     	with self.assertRaises(ModjoSyntaxError):
             try:
                 modelDefinition = ModelDefinition("fixtures/model/ko/xmlPropertyWithoutName.xml")
+                self.fail("Fixture file seems to bo ok...")
+            except IOError:
+                self.fail("Fixture file does not exist...")
+
+    def testPropertyWithInvalidTypeModel(self):
+    	with self.assertRaises(ModjoSyntaxError):
+            try:
+                modelDefinition = ModelDefinition("fixtures/model/ko/xmlPropertyInvalidType.xml")
                 self.fail("Fixture file seems to bo ok...")
             except IOError:
                 self.fail("Fixture file does not exist...")

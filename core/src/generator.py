@@ -40,11 +40,11 @@ class ModelOutput:
 
     def __init__(self, output, model):
         name_tpl = SimpleTemplate(output.name)
-        filename = name_tpl.render(model=model.name)
+        filename = name_tpl.render(model=model.name, Model=model.Name)
 
         tpl_file = open(output.src, 'r')
         content_tpl = SimpleTemplate(tpl_file)
-        content = content_tpl.render(model=model)
+        content = content_tpl.render(model=model,equ=output.equivalences)
         tpl_file.close()
 
         self.name = filename

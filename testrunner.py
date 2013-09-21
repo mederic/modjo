@@ -14,6 +14,7 @@ suite = []
 
 if args.test_name is None:
     suite.append(unittest.TestLoader().loadTestsFromTestCase(SimpleModelTestCase))
+    suite.append(unittest.TestLoader().loadTestsFromTestCase(ComplexModelTestCase))
     suite.append(unittest.TestLoader().loadTestsFromTestCase(WrongModelTestCase))
     suite.append(unittest.TestLoader().loadTestsFromTestCase(SimpleTemplateTestCase))
     unittest.TextTestRunner(verbosity=2).run(unittest.TestSuite(suite))

@@ -14,5 +14,5 @@ class SimpleTemplateTestCase(unittest.TestCase):
         self.assertEqual(len(subtemplate.outputs), 1)
         template_output = subtemplate.outputs[0]
 
-        self.assertEqual(template_output.src, "model.tmpl.txt")
+        self.assertEqual(template_output.src,"fixtures/template/ok/simpleTemplate/model.tmpl.txt")
         self.assertEqual(template_output.name, "{{model}}.txt")
