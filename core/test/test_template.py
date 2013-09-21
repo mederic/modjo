@@ -16,3 +16,4 @@ class SimpleTemplateTestCase(unittest.TestCase):
 
         self.assertEqual(template_output.src,"fixtures/template/ok/simpleTemplate/model.tmpl.txt")
         self.assertEqual(template_output.name, "{{model}}.txt")
+        self.assertEqual(template_output.output_dir, "model/{{model}}");
