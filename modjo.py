@@ -27,7 +27,6 @@ parser.add_argument('-m', '--model', action="store", dest="modelPath", default=N
 parser.add_argument('-t', '--template', action="store", dest="templatePath", default=None, help='path to the folder container files describing the template')
 parser.add_argument('-o', '--output', action="store", dest="outputPath",
 default='modjoResult', help='path to the directory where result file(s) will be created')
-parser.add_argument('-d', '--debug', action="store_true", dest="debug", help='print debug informations')
 parser.add_argument('-c', '--check', action="store_true", dest="checkMode", help='validate (or not) a template and/or a model')
 
 args = parser.parse_args()
@@ -63,3 +62,7 @@ if not modelDefinition is None and not templateDefinition is None:
     fileGenerator = generator.Generator(modelDefinition, templateDefinition)
     fileGenerator.writeToDest(args.outputPath)
 
+if args.checkMode:
+    print "Files have been successfully checked!"
+else:
+    print "File(s) successfully created in \"" + args.outputPath + "\"!"
