@@ -36,17 +36,40 @@ class TemplateGenerator:
 
     def __init__(self, template, modelDefinition):
         self.outputs = []
-        if (template.target == 'model'):
-            for model in modelDefinition.models:
-                for output in template.outputs:
+        for output in template.outputs:
+            if (template.target == 'model'):
+                for model in modelDefinition.models:
                     self.outputs.append(ModelOutput(output, model))
+            elif (template.target == 'webservice'):
+                for webservice in modelDefinition.webservices:
+                    self.outputs.append(WebserviceOutput(output, webservice))
+            else:
+                    self.outputs.append(StandardOutput(output))
+
+class StandardOutput:
+
+    def __init__(self, output):
+        name_tpl = SimpleTemplate(output.name)
+        filename = name_tpl.render()
+
+        tpl_file = open(output.src, 'r')
+        content_tpl = SimpleTemplate(tpl_file)
+        content = content_tpl.render()
+        tpl_file.close()
+
+        output_dir_tpl = SimpleTemplate(output.output_dir)
+        output_dir = output_dir_tpl.render()
+
+        self.output_dir = output_dir
+        self.name = filename
+        self.content = content
 
 
 class ModelOutput:
 
     def __init__(self, output, model):
         name_tpl = SimpleTemplate(output.name)
-        filename = name_tpl.render(model=model.name, Model=model.Name)
+        filename = name_tpl.render(model=model.name, Model=model.Name, MODEL=model.NAME)
 
         tpl_file = open(output.src, 'r')
         content_tpl = SimpleTemplate(tpl_file)
@@ -54,7 +77,26 @@ class ModelOutput:
         tpl_file.close()
 
         output_dir_tpl = SimpleTemplate(output.output_dir)
-        output_dir = output_dir_tpl.render(model=model.name, Model=model.Name)
+        output_dir = output_dir_tpl.render(model=model.name, Model=model.Name, MODEL=model.NAME)
+
+        self.output_dir = output_dir
+        self.name = filename
+        self.content = content
+
+
+class WebserviceOutput:
+
+    def __init__(self, output, webservice):
+        name_tpl = SimpleTemplate(output.name)
+        filename = name_tpl.render(webservice=webservice.name, Webservice=webservice.Name, WEBSERVICE=webservice.NAME)
+
+        tpl_file = open(output.src, 'r')
+        content_tpl = SimpleTemplate(tpl_file)
+        content = content_tpl.render(webservice=webservice,equ=output.equivalences)
+        tpl_file.close()
+
+        output_dir_tpl = SimpleTemplate(output.output_dir)
+        output_dir = output_dir_tpl.render(webservice=webservice.name, Webservice=webservice.Name, WEBSERVICE=webservice.NAME)
 
         self.output_dir = output_dir
         self.name = filename

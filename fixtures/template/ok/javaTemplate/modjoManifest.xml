@@ -28,7 +28,15 @@
     </equivalences>
     <templates>
         <template target="model" dir="model">
-	    <output name="{{Model}}.java" src="model.tmpl.txt"/>
-	</template>
+            <output name="{{Model}}.java" src="model.tmpl.txt"/>
+        </template>
+        <template target="webservice" dir="services">
+            <output name="{{Webservice}}Request.java" src="wsrequest.tmpl.txt" dir="request"/>
+	    <output name="{{Webservice}}Result.java" src="wsresult.tmpl.txt" dir="result"/>
+        </template>
+        <template>
+            <output name="AbstractRequest.java" src="request.tmpl.txt" dir="services"/>
+            <output name="AbstractResult.java" src="result.tmpl.txt" dir="services"/>
+        </template>
     </templates>
 </root>

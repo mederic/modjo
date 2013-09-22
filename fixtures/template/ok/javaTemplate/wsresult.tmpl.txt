@@ -1,0 +1,3 @@
+public class {{webservice.Name}}Result extends AbstractResult<{{!equ.convert('java', webservice.result)}}> {
+
+}

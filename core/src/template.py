@@ -119,6 +119,9 @@ class TemplateOutput:
         self.name = xml_output.get('name')
 
         self.output_dir = template.output_dir
+        if self.output_dir is None:
+            self.output_dir = str()
+
         sub_dir = xml_output.get('dir')
         if not sub_dir is None:
             self.output_dir += "/" + sub_dir

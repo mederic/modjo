@@ -75,7 +75,8 @@ class Model:
         self.name = xml_model.get('name')
         if self.name is None:
             raise ModjoSyntaxError("Model defined without a name.")
-        self.Name = self.name.capitalize();
+        self.Name = self.name[0].upper() + self.name[1:]
+        self.NAME = self.name.upper()
 
         self.properties = []
         self.depending_models = set()
@@ -89,7 +90,8 @@ class Property:
         self.name = xml_property.get('name')
         if self.name is None:
             raise ModjoSyntaxError("Property defined without a name.")
-        self.Name = self.name.capitalize();
+        self.Name = self.name[0].upper() + self.name[1:]
+        self.NAME = self.name.upper()
 
         self.dataType = xml_property.get('type')
         if self.dataType is None:
@@ -102,7 +104,8 @@ class Webservice:
         self.name = xml_webservice.get('name')
         if self.name is None:
             raise ModjoSyntaxError("Webservice defined without a name.")
-        self.Name = self.name.capitalize();
+        self.Name = self.name[0].upper() + self.name[1:]
+        self.NAME = self.name.upper()
 
         self.method = xml_webservice.find('method').text
         self.path = xml_webservice.find('path').text
@@ -112,9 +115,13 @@ class Webservice:
 
         if self.method is None:
             raise ModjoSyntaxError("Webservice defined without a http method.")
+        self.Method = self.method[0].upper() + self.method[1:]
+        self.METHOD = self.method.upper()
 
         if self.path is None:
             raise ModjoSyntaxError("Webservice defined without a http path.")
+        self.Path = self.path[0].upper() + self.path[1:]
+        self.PATH = self.path.upper()
 
         if self.result is None:
             raise ModjoSyntaxError("Webservice defined without a return type.")
@@ -132,7 +139,8 @@ class Parameter:
         self.name = xml_parameter.get('name')
         if self.name is None:
             raise ModjoSyntaxError("Webservice parameter defined without a name.")
-        self.Name = self.name.capitalize();
+        self.Name = self.name[0].upper() + self.name[1:]
+        self.NAME = self.name.upper()
 
         self.dataType = xml_parameter.get('type')
         if self.dataType is None:
