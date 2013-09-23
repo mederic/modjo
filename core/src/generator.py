@@ -57,10 +57,12 @@ class StandardOutput:
         content = content_tpl.render()
         tpl_file.close()
 
-        output_dir_tpl = SimpleTemplate(output.output_dir)
-        output_dir = output_dir_tpl.render()
-
-        self.output_dir = output_dir
+        output_dir = None
+        if not output.output_dir is None and not output.output_dir == '':
+            output_dir_tpl = SimpleTemplate(output.output_dir)
+            output_dir = output_dir_tpl.render()
+            
+        self.output_dir = output_dir        
         self.name = filename
         self.content = content
 
@@ -76,10 +78,12 @@ class ModelOutput:
         content = content_tpl.render(model=model,equ=output.equivalences)
         tpl_file.close()
 
-        output_dir_tpl = SimpleTemplate(output.output_dir)
-        output_dir = output_dir_tpl.render(model=model.name, Model=model.Name, MODEL=model.NAME)
-
-        self.output_dir = output_dir
+        output_dir = None
+        if not output.output_dir is None and not output.output_dir == '':
+            output_dir_tpl = SimpleTemplate(output.output_dir)
+            output_dir = output_dir_tpl.render(model=model.name, Model=model.Name, MODEL=model.NAME)
+            
+        self.output_dir = output_dir            
         self.name = filename
         self.content = content
 
@@ -95,9 +99,12 @@ class WebserviceOutput:
         content = content_tpl.render(webservice=webservice,equ=output.equivalences)
         tpl_file.close()
 
-        output_dir_tpl = SimpleTemplate(output.output_dir)
-        output_dir = output_dir_tpl.render(webservice=webservice.name, Webservice=webservice.Name, WEBSERVICE=webservice.NAME)
-
-        self.output_dir = output_dir
+        output_dir = None
+        if not output.output_dir is None and not output.output_dir == '':
+            output_dir_tpl = SimpleTemplate(output.output_dir)
+            output_dir = output_dir_tpl.render(webservice=webservice.name, Webservice=webservice.Name, WEBSERVICE=webservice.NAME)
+            
+            
+        self.output_dir = output_dir        
         self.name = filename
         self.content = content
