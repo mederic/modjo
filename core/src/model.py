@@ -55,6 +55,21 @@ class ModelDefinition:
                     raise ModjoSyntaxError(msg)
                 elif model_property.dataType in model_names:
                     model.depending_models.add(models[model_property.dataType])
+                elif utils.is_a_list(model_property.dataType):
+                    model.has_list = True
+                    baseType = model_property.dataType.split('[')[0];
+                    if baseType in model_names:
+                        model.depending_models.add(models[baseType])
+                elif utils.is_a_map(model_property.dataType):
+                    model.has_map = True
+                    baseType = model_property.dataType.split('[')[0];
+                    keyType = model_property.dataType.replace(baseType, '')
+                    keyType = keyType.replace('[', '')
+                    keyType = keyType.replace(']', '')
+                    if keyType in model_names:
+                        model.depending_models.add(models[keyType])
+                    if baseType in model_names:
+                        model.depending_models.add(models[baseType])
 
         for service in self.webservices:
             if not service.result in available_types:
@@ -68,6 +83,21 @@ class ModelDefinition:
                     raise ModjoSyntaxError(msg)
                 elif parameter.dataType in model_names:
                     service.depending_models.add(models[parameter.dataType])
+                elif utils.is_a_list(parameter.dataType):
+                    service.has_list = True
+                    baseType = parameter.dataType.split('[')[0];
+                    if baseType in model_names:
+                        service.depending_models.add(models[baseType])
+                elif utils.is_a_map(parameter.dataType):
+                    service.has_map = True
+                    baseType = parameter.dataType.split('[')[0];
+                    keyType = parameter.dataType.replace(baseType, '')
+                    keyType = keyType.replace('[', '')
+                    keyType = keyType.replace(']', '')
+                    if keyType in model_names:
+                        service.depending_models.add(models[keyType])
+                    if baseType in model_names:
+                        service.depending_models.add(models[baseType])
 
 class Model:
 
@@ -78,6 +108,9 @@ class Model:
         self.Name = self.name[0].upper() + self.name[1:]
         self.NAME = self.name.upper()
 
+        self.has_list = False
+        self.has_map = False
+        
         self.properties = []
         self.depending_models = set()
         for xml_property in xml_model.iter('property'):
@@ -107,6 +140,9 @@ class Webservice:
         self.Name = self.name[0].upper() + self.name[1:]
         self.NAME = self.name.upper()
 
+        self.has_list = False
+        self.has_map = False
+        
         self.method = xml_webservice.find('method').text
         self.path = xml_webservice.find('path').text
         self.result = xml_webservice.find('result').text

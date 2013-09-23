@@ -1,3 +1,12 @@
+package {{inputs['basepackage']}}.webservices.result;
+
+% if webservice.has_list:
+import java.util.List;
+% end
+% if webservice.has_map:
+import java.util.Map;
+% end
+
 public class {{webservice.Name}}Result extends SimpleResult<{{!equ.convert('java', webservice.result)}}> {
 
 }

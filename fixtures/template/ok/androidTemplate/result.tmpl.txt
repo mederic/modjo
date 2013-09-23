@@ -1,3 +1,5 @@
+package {{inputs['basepackage']}}.webservices;
+
 import com.google.api.client.util.Key;
 
 public class SimpleResult<E> {
@@ -45,6 +47,7 @@ public class SimpleResult<E> {
     public void setResult(E result) {
         this.result = result;
     }
+    
     @Override
     public String toString(){
         StringBuilder sb = new StringBuilder();

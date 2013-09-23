@@ -1,3 +1,5 @@
+package {{inputs['basepackage']}}.webservices;
+
 import com.google.api.client.http.GenericUrl;
 import com.google.api.client.http.HttpRequest;
 import com.google.api.client.http.HttpResponse;
@@ -15,7 +17,7 @@ abstract public class AbstractRequest<T> extends GoogleHttpClientSpiceRequest<T>
 	
     private static final String TAG = AbstractRequest.class.getName();
     
-	pubic enum HttpMethod {
+	public enum HttpMethod {
 		GET,
 		POST,
 		PUT,

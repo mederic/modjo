@@ -3,6 +3,9 @@
     <description>
         Template for android using robospice framework for service return in JSON
     </description>
+    <inputs>
+        <input name="basepackage" default="com.modjo"/>
+    </inputs>
     <equivalences>
         <equivalence name="java">
             <string>String</string>
@@ -32,16 +35,16 @@
         </equivalence>
     </equivalences>
     <templates>
-        <template target="model" dir="model">
+        <template target="model" dir="models">
             <output name="{{Model}}.java" src="model.tmpl.txt"/>
         </template>
-        <template target="webservice" dir="services">
+        <template target="webservice" dir="webservices">
             <output name="{{Webservice}}Request.java" src="wsrequest.tmpl.txt" dir="request"/>
 	    <output name="{{Webservice}}Result.java" src="wsresult.tmpl.txt" dir="result"/>
         </template>
         <template>
-            <output name="AbstractRequest.java" src="request.tmpl.txt" dir="services"/>
-            <output name="SimpleResult.java" src="result.tmpl.txt" dir="services"/>
+            <output name="AbstractRequest.java" src="request.tmpl.txt" dir="webservices"/>
+            <output name="SimpleResult.java" src="result.tmpl.txt" dir="webservices"/>
             <output name="readme.txt" src="readme.txt"/>
         </template>
     </templates>

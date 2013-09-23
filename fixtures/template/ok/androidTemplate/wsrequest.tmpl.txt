@@ -1,3 +1,13 @@
+package {{inputs['basepackage']}}.webservices.request;
+
+import android.content.Context;
+import {{inputs['basepackage']}}.webservices.request.AbstractRequest;
+import {{inputs['basepackage']}}.webservices.request.AbstractRequest.HttpMethod;
+import {{inputs['basepackage']}}.webservices.result.{{webservice.Name}}Result;
+
+import java.util.HashMap;
+import java.util.Map;
+
 public class {{webservice.Name}}Request extends AbstractRequest<{{webservice.Name}}Result> {
 
 % for parameter in webservice.parameters:

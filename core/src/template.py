@@ -18,6 +18,15 @@ class TemplateDefinition:
             for xml_subtemplate in templates_root.iter('template'):
                 self.subtemplates.append(Template(xml_subtemplate, self))
 
+            self.inputs = {}
+            inputs_root = root.find('inputs')
+            if not inputs_root is None:
+                for xml_input in inputs_root.iter('input'):
+                    key = xml_input.get('name')
+                    default_value = xml_input.get('default')
+                    if not key is None:
+                        self.inputs[key] = default_value;
+
             if not self.subtemplates:
                 raise ModjoSyntaxError("No templates found.")
         except ET.ParseError:
@@ -26,6 +35,12 @@ class TemplateDefinition:
             raise ModjoTemplateError("No modjoManifest.xml found.")
         except AttributeError:
             raise ModjoSyntaxError("No templates  attribute found.")
+            
+    def prompt_input(self):
+        if self.inputs:
+            print "This template needs some inputs..."
+        for key in self.inputs:
+            self.inputs[key] = raw_input(key + ":\n")
 
 
 class Equivalences:

@@ -1,3 +1,12 @@
+package {{inputs['basepackage']}}.models;
+
+% if model.has_list:
+import java.util.List;
+% end
+% if model.has_map:
+import java.util.Map;
+% end
+
 public class {{model.Name}} {
 
 % for property in model.properties:
@@ -6,7 +15,7 @@ public class {{model.Name}} {
 
 	public {{model.Name}}() {
 	} 
-
+	
 % for property in model.properties:
 	public {{!equ.convert('java', property.dataType)}} get{{property.Name}}() {
 		return this.{{property.name}};
@@ -16,4 +25,5 @@ public class {{model.Name}} {
 		this.{{property.name}} = {{property.name}};
 	}
 % end
+   
 }
