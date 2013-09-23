@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<root model-name="java template #1">
+<root model-name="android-robospice">
+    <description>
+        Template for android using robospice framework for service return in JSON
+    </description>
     <equivalences>
         <equivalence name="java">
             <string>String</string>
@@ -38,7 +41,8 @@
         </template>
         <template>
             <output name="AbstractRequest.java" src="request.tmpl.txt" dir="services"/>
-            <output name="AbstractResult.java" src="result.tmpl.txt" dir="services"/>
+            <output name="SimpleResult.java" src="result.tmpl.txt" dir="services"/>
+            <output name="readme.txt" src="readme.txt"/>
         </template>
     </templates>
 </root>

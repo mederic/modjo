@@ -10,6 +10,7 @@
 			<property type="string" name="firstname"/>
 			<property type="string" name="lastname"/>
 			<property type="date" name="birthdate"/>
+			<property type="boolean" name="isAMan"/>
 		</model>
 		<model name="shop">
 			<property type="string" name="id"/>

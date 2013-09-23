@@ -1,7 +1,7 @@
 import re
 
 def get_standard_types():
-    return ['date', 'string', 'float', 'int', 'long', 'double', 'char']
+    return ['date', 'boolean', 'string', 'float', 'int', 'long', 'double', 'char']
 
 def is_a_list(data_type):
     reg = re.compile('[a-zA-Z]+\[\]')

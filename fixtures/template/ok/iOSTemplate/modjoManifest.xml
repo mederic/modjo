@@ -4,6 +4,7 @@
         <equivalence name="ios">
             <string>NSString *</string>
             <date>NSDate *</date>
+            <boolean>BOOL</boolean>
             <float>float </float>
             <int>int </int>
             <long>long </long>
@@ -16,6 +17,7 @@
         <equivalence name="ios-property">
             <string>@property (nonatomic, strong) NSString *</string>
             <date>@property (nonatomic, strong) NSDate *</date>
+            <boolean>@property (assign) BOOL </boolean>
             <float>@property (assign) float </float>
             <int>@property (assign) int </int>
             <long>@property (assign) long </long>

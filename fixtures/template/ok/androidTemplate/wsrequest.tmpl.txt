@@ -1,0 +1,41 @@
+public class {{webservice.Name}}Request extends AbstractRequest<{{webservice.Name}}Result> {
+
+% for parameter in webservice.parameters:
+	private {{!equ.convert('java', parameter.dataType)}} {{parameter.name}};
+% end
+
+	public {{webservice.Name}}Request(Context context) {
+		super(context, {{webservice.Name}}Result.class)
+	}
+ 
+% for parameter in webservice.parameters:
+	public {{!equ.convert('java', parameter.dataType)}} get{{parameter.Name}}() {
+		return this.{{parameter.name}};
+	}
+
+	public void set{{parameter.Name}}({{!equ.convert('java', parameter.dataType)}} {{parameter.name}}) {
+		this.{{parameter.name}} = {{parameter.name}};
+	}
+% end
+
+
+    @Override
+	public String getPath() {
+		return "{{webservice.path}}";
+	}
+
+    @Override
+	public HttpMethod getHTTPMethod() {
+		return HttpMethod.{{webservice.METHOD}};
+	}	
+	
+    @Override
+    public Map<String, Object> getVariables() {
+        HashMap<String, Object> map = new HashMap<String, Object>();
+% for parameter in webservice.parameters:
+        map.put("{{parameter.name}}", this.{{parameter.name}});
+% end
+        return map;
+    }
+}
+
