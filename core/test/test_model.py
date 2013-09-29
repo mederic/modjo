@@ -21,6 +21,10 @@ class SimpleModelTestCase(unittest.TestCase):
 
             self.assertEqual(longitudeProperty.dataType, "double")
             self.assertEqual(longitudeProperty.name, "longitude")
+
+            self.assertEquals(len(locationModel.depending_models), 0)
+            self.assertFalse(locationModel.has_map)
+            self.assertFalse(locationModel.has_list)
         except IOError:
             self.fail("Fixture file does not exist...")
         except XMLParseError:
@@ -80,6 +84,114 @@ class ComplexModelTestCase(unittest.TestCase):
         except XMLParseError:
             self.fail("Unexpected exception when parsing model")
 
+    def testDependingModels(self):
+        try:
+            modelDefinition = ModelDefinition("fixtures/model/ok/complexModelFullDependancies.xml")
+
+            model1 = modelDefinition.models[0]
+            self.assertEquals(model1.name, "model0")
+            self.assertTrue(model1.has_map)
+            self.assertTrue(model1.has_list)
+            self.assertEquals(len(model1.depending_models), 4)
+            depends = []
+            for model in model1.depending_models:
+                depends.append(model.name)
+            self.assertTrue("model1" in depends)
+            self.assertTrue("model2" in depends)
+            self.assertTrue("model3" in depends)
+            self.assertTrue("model4" in depends)
+
+            ws1 = modelDefinition.webservices[0]
+            self.assertEquals(ws1.name, "ws1")
+            self.assertEquals(len(ws1.depending_models), 5)
+            self.assertTrue(ws1.has_map)
+            self.assertTrue(ws1.has_list)
+            depends = []
+            for model in ws1.depending_models:
+                depends.append(model.name)
+            self.assertTrue("model1" in depends)
+            self.assertTrue("model2" in depends)
+            self.assertTrue("model3" in depends)
+            self.assertTrue("model4" in depends)
+            self.assertTrue("model5" in depends)
+
+            ws1 = modelDefinition.webservices[1]
+            self.assertEquals(ws1.name, "ws2")
+            self.assertEquals(len(ws1.depending_models), 5)
+            self.assertTrue(ws1.has_map)
+            self.assertTrue(ws1.has_list)
+            depends = []
+            for model in ws1.depending_models:
+                depends.append(model.name)
+            self.assertTrue("model1" in depends)
+            self.assertTrue("model2" in depends)
+            self.assertTrue("model3" in depends)
+            self.assertTrue("model4" in depends)
+            self.assertTrue("model5" in depends)
+
+            ws1 = modelDefinition.webservices[2]
+            self.assertEquals(ws1.name, "ws3")
+            self.assertEquals(len(ws1.depending_models), 6)
+            self.assertTrue(ws1.has_map)
+            self.assertTrue(ws1.has_list)
+            depends = []
+            for model in ws1.depending_models:
+                depends.append(model.name)
+            self.assertTrue("model1" in depends)
+            self.assertTrue("model2" in depends)
+            self.assertTrue("model3" in depends)
+            self.assertTrue("model4" in depends)
+            self.assertTrue("model5" in depends)
+            self.assertTrue("model6" in depends)
+
+        except IOError:
+            self.fail("Fixture file does not exist...")
+        except XMLParseError:
+            self.fail("Unexpected exception when parsing model")
+
+    def testComplexModelAndServices(self):
+        try:
+            modelDefinition = ModelDefinition("fixtures/model/ok/complexModelAndServices.xml")
+            self.assertEqual(len(modelDefinition.webservices), 3)
+
+            getListShopService = modelDefinition.webservices[0]
+            self.assertEqual(getListShopService.name, "getListShop")
+            self.assertEqual(getListShopService.method, "get")
+            self.assertEqual(getListShopService.path, "/shop")
+            self.assertEqual(getListShopService.result, "shop[]")
+            self.assertEqual(len(getListShopService.parameters), 2)
+
+            latParam = getListShopService.parameters[0]
+            self.assertEqual(latParam.dataType, "double")
+            self.assertEqual(latParam.name, "latitude")
+
+            lonParam = getListShopService.parameters[1]
+            self.assertEqual(lonParam.dataType, "double")
+            self.assertEqual(lonParam.name, "longitude")
+
+            getAddPersonService = modelDefinition.webservices[1]
+            self.assertEqual(getAddPersonService.name, "addPerson")
+            self.assertEqual(getAddPersonService.method, "post")
+            self.assertEqual(getAddPersonService.path, "/person")
+            self.assertEqual(getAddPersonService.result, "string")
+            self.assertEqual(len(getAddPersonService.parameters), 3)
+
+            firstname = getAddPersonService.parameters[0]
+            self.assertEqual(firstname.dataType, "string")
+            self.assertEqual(firstname.name, "firstname")
+
+            lastname = getAddPersonService.parameters[1]
+            self.assertEqual(lastname.dataType, "string")
+            self.assertEqual(lastname.name, "lastname")
+
+            birthdate = getAddPersonService.parameters[2]
+            self.assertEqual(birthdate.dataType, "long")
+            self.assertEqual(birthdate.name, "birthdate")
+
+        except IOError:
+            self.fail("Fixture file does not exist...")
+        except XMLParseError:
+            self.fail("Unexpected exception when parsing model")
 
 
 class WrongModelTestCase(unittest.TestCase):
@@ -152,6 +264,38 @@ class WrongModelTestCase(unittest.TestCase):
     	with self.assertRaises(ModjoSyntaxError):
             try:
                 modelDefinition = ModelDefinition("fixtures/model/ko/xmlPropertyInvalidType.xml")
+                self.fail("Fixture file seems to bo ok...")
+            except IOError:
+                self.fail("Fixture file does not exist...")
+
+    def testServiceWithoutHttpMethod(self):
+    	with self.assertRaises(ModjoSyntaxError):
+            try:
+                modelDefinition = ModelDefinition("fixtures/model/ko/serviceWithoutHttpMethod.xml")
+                self.fail("Fixture file seems to bo ok...")
+            except IOError:
+                self.fail("Fixture file does not exist...")
+
+    def testServiceWithoutHttpPath(self):
+    	with self.assertRaises(ModjoSyntaxError):
+            try:
+                modelDefinition = ModelDefinition("fixtures/model/ko/serviceWithoutHttpPath.xml")
+                self.fail("Fixture file seems to bo ok...")
+            except IOError:
+                self.fail("Fixture file does not exist...")
+
+    def testServiceParameterWithoutName(self):
+    	with self.assertRaises(ModjoSyntaxError):
+            try:
+                modelDefinition = ModelDefinition("fixtures/model/ko/serviceParameterWithoutName.xml")
+                self.fail("Fixture file seems to bo ok...")
+            except IOError:
+                self.fail("Fixture file does not exist...")
+
+    def testServiceParameterWithoutType(self):
+    	with self.assertRaises(ModjoSyntaxError):
+            try:
+                modelDefinition = ModelDefinition("fixtures/model/ko/serviceParameterWithoutType.xml")
                 self.fail("Fixture file seems to bo ok...")
             except IOError:
                 self.fail("Fixture file does not exist...")

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root model-name="complex model full dependencies">
+	<models>
+		<model name="model0">
+			<property type="model1" name="test1"/>
+			<property type="model2[]" name="test2"/>
+			<property type="model3[model4]" name="test3"/>
+		</model>
+		<model name="model1">
+			<property type="double" name="test"/>
+		</model>
+		<model name="model2">
+			<property type="double" name="test"/>
+		</model>
+		<model name="model3">
+			<property type="double" name="test"/>
+		</model>
+		<model name="model4">
+			<property type="double" name="test"/>
+		</model>
+		<model name="model5">
+			<property type="double" name="test"/>
+		</model>
+		<model name="model6">
+			<property type="double" name="test"/>
+		</model>
+	</models>
+	<webservices>
+		<webservice name="ws1">
+			<method>get</method>
+			<path>/ws1</path>
+			<parameters>
+				<parameter type="model1" name="test1"/>
+				<parameter type="model2[]" name="test2"/>
+				<parameter type="model3[model4]" name="test3"/>
+			</parameters>
+			<result>model5</result>
+		</webservice>
+		<webservice name="ws2">
+			<method>get</method>
+			<path>/ws2</path>
+			<parameters>
+				<parameter type="model1" name="test1"/>
+				<parameter type="model2[]" name="test2"/>
+				<parameter type="model3[model4]" name="test3"/>
+			</parameters>
+			<result>model5[]</result>
+		</webservice>
+		<webservice name="ws3">
+			<method>get</method>
+			<path>/ws3</path>
+			<parameters>
+				<parameter type="model1" name="test1"/>
+				<parameter type="model2[]" name="test2"/>
+				<parameter type="model3[model4]" name="test3"/>
+			</parameters>
+			<result>model5[model6]</result>
+		</webservice>
+	</webservices>
+</root>

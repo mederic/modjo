@@ -29,8 +29,8 @@ class ModelDefinition:
 
         except ET.ParseError:
             raise XMLParseError(filePath)
-        except AttributeError:
-            raise ModjoSyntaxError("No models attribute found.")
+        except AttributeError as attr_error:
+            raise ModjoSyntaxError(str(attr_error))
 
     def check_types(self):
         model_names = []
@@ -77,6 +77,21 @@ class ModelDefinition:
                 raise ModjoSyntaxError(msg)
             elif service.result in model_names:
                 service.depending_models.add(models[service.result])
+            elif utils.is_a_list(service.result):
+                service.has_list = True
+                baseType = service.result.split('[')[0];
+                if baseType in model_names:
+                    service.depending_models.add(models[baseType])
+            elif utils.is_a_map(service.result):
+                service.has_map = True
+                baseType = service.result.split('[')[0];
+                keyType = service.result.replace(baseType, '')
+                keyType = keyType.replace('[', '')
+                keyType = keyType.replace(']', '')
+                if keyType in model_names:
+                    service.depending_models.add(models[keyType])
+                if baseType in model_names:
+                    service.depending_models.add(models[baseType])
             for parameter in service.parameters:
                 if not parameter.dataType in available_types:
                     msg =  'Invalid webservice parameter type : ' + parameter.dataType + '.'
@@ -142,10 +157,16 @@ class Webservice:
 
         self.has_list = False
         self.has_map = False
-        
-        self.method = xml_webservice.find('method').text
-        self.path = xml_webservice.find('path').text
-        self.result = xml_webservice.find('result').text
+
+        self.method = None
+        self.path = None
+        self.result = None
+        if not xml_webservice.find('method') is None:
+            self.method = xml_webservice.find('method').text
+        if not xml_webservice.find('path') is None:
+            self.path = xml_webservice.find('path').text
+        if not xml_webservice.find('result') is None:
+            self.result = xml_webservice.find('result').text
 
         self.depending_models = set()
 
