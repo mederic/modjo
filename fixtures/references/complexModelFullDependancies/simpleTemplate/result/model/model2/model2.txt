@@ -1,0 +1,4 @@
+Model name: model2
+--------------------------
+Properties:
+    test <double>

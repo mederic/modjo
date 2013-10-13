@@ -2,6 +2,7 @@ import xml.etree.ElementTree as ET
 
 from core.src.error import *
 from core.src import utils
+from core.src.OrderedSet import *
 
 class ModelDefinition:
 
@@ -125,9 +126,9 @@ class Model:
 
         self.has_list = False
         self.has_map = False
-        
+
         self.properties = []
-        self.depending_models = set()
+        self.depending_models = OrderedSet()
         for xml_property in xml_model.iter('property'):
             self.properties.append(Property(xml_property))
 
@@ -168,7 +169,7 @@ class Webservice:
         if not xml_webservice.find('result') is None:
             self.result = xml_webservice.find('result').text
 
-        self.depending_models = set()
+        self.depending_models = OrderedSet()
 
         if self.method is None:
             raise ModjoSyntaxError("Webservice defined without a http method.")

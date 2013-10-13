@@ -1,0 +1,8 @@
+Model name: person
+--------------------------
+Properties:
+    id <string>
+    firstname <string>
+    lastname <string>
+    birthdate <date>
+    isAMan <boolean>

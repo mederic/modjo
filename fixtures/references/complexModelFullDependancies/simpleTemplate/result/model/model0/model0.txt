@@ -1,0 +1,6 @@
+Model name: model0
+--------------------------
+Properties:
+    test1 <model1>
+    test2 <model2[]>
+    test3 <model3[model4]>

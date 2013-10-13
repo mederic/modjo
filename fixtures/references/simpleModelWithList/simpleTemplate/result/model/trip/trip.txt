@@ -1,0 +1,6 @@
+Model name: trip
+--------------------------
+Properties:
+    from <date>
+    to <date>
+    location <location>

@@ -4,6 +4,7 @@ import os
 import datetime 
 import shutil
 import xml.etree.ElementTree as ET
+from core.test.utils import *
 from core.src.model import *
 from core.src.template import *
 from core.src.generator import *
@@ -33,10 +34,7 @@ def main():
             for template in os.listdir(templates_folder_path):
                 print '    -> ' + template
                 template_definition = TemplateDefinition(templates_folder_path + template)
-                if template_definition.has_inputs():
-                    for input_key in template_definition.get_input_keys():
-                        value = input_key + "_default_value"
-                        template_definition.put_input(input_key, value)
+                fill_with_default_values(template_definition)
 
                 file_generator = Generator(model_definition, template_definition)
                 current_target_folder = ref_folder_path
