@@ -59,7 +59,12 @@ if not args.templatePath is None:
         print "Incorrect template: " + modjoSynError.reason
 
 if not modelDefinition is None and not templateDefinition is None:
-    templateDefinition.prompt_input()
+    if templateDefinition.has_inputs():
+        print "This template needs some inputs..."
+        for input_key in templateDefinition.get_input_keys():
+            value = raw_input(key + ":\n")
+            templateDefinition.put_input(key, value)
+
     fileGenerator = generator.Generator(modelDefinition, templateDefinition)
     fileGenerator.writeToDest(args.outputPath)
 

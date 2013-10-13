@@ -35,12 +35,21 @@ class TemplateDefinition:
             raise ModjoTemplateError("No modjoManifest.xml found.")
         except AttributeError:
             raise ModjoSyntaxError("No templates  attribute found.")
-            
-    def prompt_input(self):
+
+    def has_inputs(self):
         if self.inputs:
-            print "This template needs some inputs..."
+            return True
+        else:
+            return False
+
+    def get_input_keys(self):
+        result = []
         for key in self.inputs:
-            self.inputs[key] = raw_input(key + ":\n")
+            result.append(key)
+        return result
+
+    def put_input(self, key, value):
+        self.inputs[key] = value
 
 
 class Equivalences:
