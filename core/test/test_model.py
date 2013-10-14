@@ -157,7 +157,8 @@ class ComplexModelTestCase(unittest.TestCase):
             getListShopService = modelDefinition.webservices[0]
             self.assertEqual(getListShopService.name, "getListShop")
             self.assertEqual(getListShopService.method, "get")
-            self.assertEqual(getListShopService.path, "/shop")
+            self.assertEqual(len(getListShopService.path.entries), 1)
+            self.assertEqual(getListShopService.path.entries[0].name, "shop")
             self.assertEqual(getListShopService.result, "shop[]")
             self.assertEqual(len(getListShopService.parameters), 2)
 
@@ -172,21 +173,26 @@ class ComplexModelTestCase(unittest.TestCase):
             getAddPersonService = modelDefinition.webservices[1]
             self.assertEqual(getAddPersonService.name, "addPerson")
             self.assertEqual(getAddPersonService.method, "post")
-            self.assertEqual(getAddPersonService.path, "/person")
+            self.assertEqual(len(getAddPersonService.path.entries), 1)
+            self.assertEqual(getAddPersonService.path.contains_parameter(), False)
+            self.assertEqual(getAddPersonService.path.entries[0].name, "person")
             self.assertEqual(getAddPersonService.result, "string")
             self.assertEqual(len(getAddPersonService.parameters), 3)
 
             firstname = getAddPersonService.parameters[0]
             self.assertEqual(firstname.dataType, "string")
             self.assertEqual(firstname.name, "firstname")
+            self.assertEqual(firstname.is_in_path, False)
 
             lastname = getAddPersonService.parameters[1]
             self.assertEqual(lastname.dataType, "string")
             self.assertEqual(lastname.name, "lastname")
+            self.assertEqual(lastname.is_in_path, False)
 
             birthdate = getAddPersonService.parameters[2]
             self.assertEqual(birthdate.dataType, "long")
             self.assertEqual(birthdate.name, "birthdate")
+            self.assertEqual(birthdate.is_in_path, False)
 
         except IOError:
             self.fail("Fixture file does not exist...")

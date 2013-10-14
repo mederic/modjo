@@ -1,8 +1,8 @@
 package {{inputs['basepackage']}}.webservices.request;
 
 import android.content.Context;
-import {{inputs['basepackage']}}.webservices.request.AbstractRequest;
-import {{inputs['basepackage']}}.webservices.request.AbstractRequest.HttpMethod;
+import {{inputs['basepackage']}}.webservices.AbstractRequest;
+import {{inputs['basepackage']}}.webservices.AbstractRequest.HttpMethod;
 import {{inputs['basepackage']}}.webservices.result.{{webservice.Name}}Result;
 
 import java.util.HashMap;
@@ -29,23 +29,38 @@ public class {{webservice.Name}}Request extends AbstractRequest<{{webservice.Nam
 % end
 
 
-    @Override
+	@Override
 	public String getPath() {
+% if webservice.path.contains_parameter():
+		StringBuilder pathBuilder = new StringBuilder();
+    % for entry in webservice.path.entries:
+		pathBuilder.append("/");
+        % if entry.is_parameter:
+		pathBuilder.append(this.{{entry.name}});
+        % else:
+		pathBuilder.append("{{entry.name}}");
+        % end 
+    % end
+		return pathBuilder.toString();
+% else:
 		return "{{webservice.path}}";
+% end
 	}
 
-    @Override
+	@Override
 	public HttpMethod getHTTPMethod() {
 		return HttpMethod.{{webservice.METHOD}};
 	}	
 	
-    @Override
-    public Map<String, Object> getVariables() {
-        HashMap<String, Object> map = new HashMap<String, Object>();
+	@Override
+	public Map<String, Object> getVariables() {
+		HashMap<String, Object> map = new HashMap<String, Object>();
 % for parameter in webservice.parameters:
-        map.put("{{parameter.name}}", this.{{parameter.name}});
+    % if not parameter.is_in_path:
+		map.put("{{parameter.name}}", this.{{parameter.name}});
+	% end
 % end
-        return map;
-    }
+		return map;
+	}
 }
 

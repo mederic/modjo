@@ -160,12 +160,9 @@ class Webservice:
         self.has_map = False
 
         self.method = None
-        self.path = None
         self.result = None
         if not xml_webservice.find('method') is None:
             self.method = xml_webservice.find('method').text
-        if not xml_webservice.find('path') is None:
-            self.path = xml_webservice.find('path').text
         if not xml_webservice.find('result') is None:
             self.result = xml_webservice.find('result').text
 
@@ -176,11 +173,6 @@ class Webservice:
         self.Method = self.method[0].upper() + self.method[1:]
         self.METHOD = self.method.upper()
 
-        if self.path is None:
-            raise ModjoSyntaxError("Webservice defined without a http path.")
-        self.Path = self.path[0].upper() + self.path[1:]
-        self.PATH = self.path.upper()
-
         if self.result is None:
             raise ModjoSyntaxError("Webservice defined without a return type.")
 
@@ -189,6 +181,62 @@ class Webservice:
         if not xml_parameters is None:
             for xml_parameter in xml_parameters.iter('parameter'):
                 self.parameters.append(Parameter(xml_parameter))
+                
+        if xml_webservice.find('path') is None:
+            raise ModjoSyntaxError("Webservice defined without a http path.")
+        else:
+            path = xml_webservice.find('path').text
+            self.path = Path(path, self)
+
+
+class Path:
+
+    def __init__(self, raw_path, webservice):
+        self.entries = []
+        for entry in raw_path.split('/'):
+            if len(entry) > 0:
+                self.entries.append(PathEntry(entry, webservice))
+            
+    def contains_parameter(self):
+        for entry in self.entries:
+            if entry.is_parameter:
+                return True
+        return False
+        
+    def __repr__(self):
+        return self.__str__()
+        
+    def __str__(self):
+        final_str = ''
+        for entry in self.entries:
+            final_str += '/' + entry.name
+        return final_str
+
+
+class PathEntry:
+
+    def __init__(self, raw_entry, webservice):
+        if raw_entry.startswith('{{') and raw_entry.endswith('}}'):
+            self.is_parameter = True
+            self.name = raw_entry[2:len(raw_entry) - 2]
+            
+            existing_parameter = False
+            for parameter in webservice.parameters:
+                print self.name + ' vs ' + parameter.name
+                if self.name == parameter.name:
+                    existing_parameter = True
+                    parameter.is_in_path = True
+                    break
+                    
+            if not existing_parameter:
+                raise ModjoSyntaxError("Webservice http path contains undefined parameter...")               
+        else:
+            self.is_parameter = False
+            self.name = raw_entry
+        
+        
+        self.Name = self.name[0].upper() + self.name[1:]
+        self.NAME = self.name.upper()
 
 
 class Parameter:
@@ -203,3 +251,5 @@ class Parameter:
         self.dataType = xml_parameter.get('type')
         if self.dataType is None:
             raise ModjoSyntaxError("Webservice parameter defined without a type.")
+            
+        self.is_in_path = False

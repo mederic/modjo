@@ -17,7 +17,7 @@ def main():
     # main references folder creation...
     if os.path.exists(ref_folder_path):
         print 'References folder already exist!'
-        overwrite = raw_input('Overwrite ? [Y/n]')
+        overwrite = raw_input('Overwrite ? [y/N]')
         if overwrite.lower() == 'y':
             shutil.rmtree(ref_folder_path)
         else:

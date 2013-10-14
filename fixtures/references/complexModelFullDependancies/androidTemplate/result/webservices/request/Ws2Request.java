@@ -1,8 +1,8 @@
 package basepackage_default_value.webservices.request;
 
 import android.content.Context;
-import basepackage_default_value.webservices.request.AbstractRequest;
-import basepackage_default_value.webservices.request.AbstractRequest.HttpMethod;
+import basepackage_default_value.webservices.AbstractRequest;
+import basepackage_default_value.webservices.AbstractRequest.HttpMethod;
 import basepackage_default_value.webservices.result.Ws2Result;
 
 import java.util.HashMap;
@@ -41,23 +41,23 @@ public class Ws2Request extends AbstractRequest<Ws2Result> {
 	}
 
 
-    @Override
+	@Override
 	public String getPath() {
 		return "/ws2";
 	}
 
-    @Override
+	@Override
 	public HttpMethod getHTTPMethod() {
 		return HttpMethod.GET;
 	}	
 	
-    @Override
-    public Map<String, Object> getVariables() {
-        HashMap<String, Object> map = new HashMap<String, Object>();
-        map.put("test1", this.test1);
-        map.put("test2", this.test2);
-        map.put("test3", this.test3);
-        return map;
-    }
+	@Override
+	public Map<String, Object> getVariables() {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("test1", this.test1);
+		map.put("test2", this.test2);
+		map.put("test3", this.test3);
+		return map;
+	}
 }
 

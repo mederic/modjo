@@ -1,8 +1,8 @@
 package basepackage_default_value.webservices.request;
 
 import android.content.Context;
-import basepackage_default_value.webservices.request.AbstractRequest;
-import basepackage_default_value.webservices.request.AbstractRequest.HttpMethod;
+import basepackage_default_value.webservices.AbstractRequest;
+import basepackage_default_value.webservices.AbstractRequest.HttpMethod;
 import basepackage_default_value.webservices.result.SetShopOwnerResult;
 
 import java.util.HashMap;
@@ -33,22 +33,22 @@ public class SetShopOwnerRequest extends AbstractRequest<SetShopOwnerResult> {
 	}
 
 
-    @Override
+	@Override
 	public String getPath() {
 		return "/shop";
 	}
 
-    @Override
+	@Override
 	public HttpMethod getHTTPMethod() {
 		return HttpMethod.PUT;
 	}	
 	
-    @Override
-    public Map<String, Object> getVariables() {
-        HashMap<String, Object> map = new HashMap<String, Object>();
-        map.put("personId", this.personId);
-        map.put("shopId", this.shopId);
-        return map;
-    }
+	@Override
+	public Map<String, Object> getVariables() {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("personId", this.personId);
+		map.put("shopId", this.shopId);
+		return map;
+	}
 }
 
