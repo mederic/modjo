@@ -1,5 +1,6 @@
 import os
 
+from abc import ABCMeta, abstractmethod
 from core.src.error import *
 from core.src.model import *
 from core.src.template import *
@@ -32,6 +33,7 @@ class Generator:
                 f.write(output.content)
                 f.close()
 
+
 class TemplateGenerator:
 
     def __init__(self, template, modelDefinition):
@@ -46,65 +48,78 @@ class TemplateGenerator:
             else:
                     self.outputs.append(StandardOutput(output, template))
 
-class StandardOutput:
 
-    def __init__(self, output, template):
-        name_tpl = SimpleTemplate(output.name)
-        filename = name_tpl.render(inputs=template.templateDefinition.inputs)
+class AbstractOutput:
+    __metaclass__ = ABCMeta
 
-        tpl_file = open(output.src, 'r')
+    def __init__(self, output):  
+        self.output = output
+        self.create()
+    
+    @abstractmethod
+    def getFilenameParams(self):
+        pass
+        
+    @abstractmethod
+    def getFileParams(self):
+        pass
+        
+    def create(self): 
+        name_tpl = SimpleTemplate(self.output.name)        
+        filename = name_tpl.render(self.getFilenameParams())
+        
+        tpl_file = open(self.output.src, 'r')
         content_tpl = SimpleTemplate(tpl_file)
-        content = content_tpl.render(inputs=template.templateDefinition.inputs)
+        content = content_tpl.render(self.getFileParams())
         tpl_file.close()
-
+        
         output_dir = None
-        if not output.output_dir is None and not output.output_dir == '':
-            output_dir_tpl = SimpleTemplate(output.output_dir)
-            output_dir = output_dir_tpl.render(inputs=template.templateDefinition.inputs)
-            
-        self.output_dir = output_dir        
-        self.name = filename
-        self.content = content
-
-
-class ModelOutput:
-
-    def __init__(self, output, model, template):
-        name_tpl = SimpleTemplate(output.name)
-        filename = name_tpl.render(model=model.name, Model=model.Name, MODEL=model.NAME, inputs=template.templateDefinition.inputs)
-
-        tpl_file = open(output.src, 'r')
-        content_tpl = SimpleTemplate(tpl_file)
-        content = content_tpl.render(model=model, equ=output.equivalences, inputs=template.templateDefinition.inputs)
-        tpl_file.close()
-
-        output_dir = None
-        if not output.output_dir is None and not output.output_dir == '':
-            output_dir_tpl = SimpleTemplate(output.output_dir)
-            output_dir = output_dir_tpl.render(model=model.name, Model=model.Name, MODEL=model.NAME, inputs=template.templateDefinition.inputs)
+        if not self.output.output_dir is None and not self.output.output_dir == '':
+            output_dir_tpl = SimpleTemplate(self.output.output_dir)
+            output_dir = output_dir_tpl.render(self.getFilenameParams())
             
         self.output_dir = output_dir            
         self.name = filename
-        self.content = content
+        self.content = content        
 
 
-class WebserviceOutput:
+class StandardOutput(AbstractOutput):
+    
+    def __init__(self, output, template):
+        self.template = template
+        AbstractOutput.__init__(self, output)
 
+    def getFilenameParams(self):
+        return dict(inputs=self.template.templateDefinition.inputs)
+        
+    def getFileParams(self):
+        return dict(inputs=self.template.templateDefinition.inputs)
+     
+     
+class ModelOutput(AbstractOutput):
+    
+    def __init__(self, output, model, template):
+        self.template = template
+        self.model = model
+        AbstractOutput.__init__(self, output)
+
+    def getFilenameParams(self):
+        return dict(model=self.model.name, Model=self.model.Name, MODEL=self.model.NAME, inputs=self.template.templateDefinition.inputs)
+        
+    def getFileParams(self):
+        return dict(model=self.model, equ=self.output.equivalences, inputs=self.template.templateDefinition.inputs)
+        
+           
+class WebserviceOutput(AbstractOutput):
+    
     def __init__(self, output, webservice, template):
-        name_tpl = SimpleTemplate(output.name)
-        filename = name_tpl.render(webservice=webservice.name, Webservice=webservice.Name, WEBSERVICE=webservice.NAME, inputs=template.templateDefinition.inputs)
+        self.template = template
+        self.webservice = webservice
+        AbstractOutput.__init__(self, output)
 
-        tpl_file = open(output.src, 'r')
-        content_tpl = SimpleTemplate(tpl_file)
-        content = content_tpl.render(webservice=webservice, equ=output.equivalences, inputs=template.templateDefinition.inputs)
-        tpl_file.close()
-
-        output_dir = None
-        if not output.output_dir is None and not output.output_dir == '':
-            output_dir_tpl = SimpleTemplate(output.output_dir)
-            output_dir = output_dir_tpl.render(webservice=webservice.name, Webservice=webservice.Name, WEBSERVICE=webservice.NAME, inputs=template.templateDefinition.inputs)
-            
-            
-        self.output_dir = output_dir        
-        self.name = filename
-        self.content = content
+    def getFilenameParams(self):
+        return dict(webservice=self.webservice.name, Webservice=self.webservice.Name, WEBSERVICE=self.webservice.NAME, inputs=self.template.templateDefinition.inputs)
+        
+    def getFileParams(self):
+        return dict(webservice=self.webservice, equ=self.output.equivalences, inputs=self.template.templateDefinition.inputs)
+        
