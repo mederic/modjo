@@ -45,8 +45,12 @@ class TemplateGenerator:
             elif (template.target == 'webservice'):
                 for webservice in modelDefinition.webservices:
                     self.outputs.append(WebserviceOutput(output, webservice, template))
+            elif (template.target == 'models'):
+                self.outputs.append(ModelsOutput(output, modelDefinition.models, template))
+            elif (template.target == 'webservices'):
+                self.outputs.append(WebservicesOutput(output, modelDefinition.webservices, template))
             else:
-                    self.outputs.append(StandardOutput(output, template))
+                self.outputs.append(StandardOutput(output, template))
 
 
 class AbstractOutput:
@@ -109,6 +113,20 @@ class ModelOutput(AbstractOutput):
     def getFileParams(self):
         return dict(model=self.model, equ=self.output.equivalences, inputs=self.template.templateDefinition.inputs)
         
+        
+class ModelsOutput(AbstractOutput):
+
+    def __init__(self, output, models, template):
+        self.template = template
+        self.models = models
+        AbstractOutput.__init__(self, output)
+
+    def getFilenameParams(self):
+        return dict(inputs=self.template.templateDefinition.inputs)
+        
+    def getFileParams(self):
+        return dict(models=self.models, equ=self.output.equivalences, inputs=self.template.templateDefinition.inputs)
+
            
 class WebserviceOutput(AbstractOutput):
     
@@ -122,4 +140,18 @@ class WebserviceOutput(AbstractOutput):
         
     def getFileParams(self):
         return dict(webservice=self.webservice, equ=self.output.equivalences, inputs=self.template.templateDefinition.inputs)
+        
+           
+class WebservicesOutput(AbstractOutput):
+    
+    def __init__(self, output, webservices, template):
+        self.template = template
+        self.webservices = webservices
+        AbstractOutput.__init__(self, output)
+
+    def getFilenameParams(self):
+        return dict(inputs=self.template.templateDefinition.inputs)
+        
+    def getFileParams(self):
+        return dict(webservices=self.webservices, equ=self.output.equivalences, inputs=self.template.templateDefinition.inputs)
         

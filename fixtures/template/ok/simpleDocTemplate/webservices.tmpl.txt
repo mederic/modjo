@@ -1,0 +1,12 @@
+Webservices 
+===============
+
+% for webservice in webservices:
+    {{webservice.Name}}
+    ------------------------
+    {{webservice.comment}}
+    Params :
+    % for param in webservice.parameters:
+        - {{param.name}} : {{param.comment}}
+    % end
+% end

@@ -131,7 +131,13 @@ class Model:
         self.depending_models = OrderedSet()
         for xml_property in xml_model.iter('property'):
             self.properties.append(Property(xml_property))
-
+            
+           
+        xml_comment = xml_model.find('comment')
+        if not xml_comment is None:
+            self.comment = xml_comment.text
+        else:
+            self.comment = None
 
 class Property:
 
@@ -187,6 +193,13 @@ class Webservice:
         else:
             path = xml_webservice.find('path').text
             self.path = Path(path, self)
+            
+            
+        xml_comment = xml_webservice.find('comment')
+        if not xml_comment is None:
+            self.comment = xml_comment.text
+        else:
+            self.comment = None
 
 
 class Path:
@@ -252,4 +265,6 @@ class Parameter:
         if self.dataType is None:
             raise ModjoSyntaxError("Webservice parameter defined without a type.")
             
-        self.is_in_path = False
+        self.is_in_path = False       
+        
+        self.comment = xml_parameter.get('comment')

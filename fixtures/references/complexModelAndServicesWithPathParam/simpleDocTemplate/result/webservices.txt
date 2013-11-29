@@ -1,0 +1,23 @@
+Webservices 
+===============
+
+    AddPerson
+    ------------------------
+    None
+    Params :
+        - firstname : None
+        - lastname : None
+        - birthdate : None
+    GetPerson
+    ------------------------
+    None
+    Params :
+        - id : None
+    EditPerson
+    ------------------------
+    None
+    Params :
+        - firstname : None
+        - id : None
+        - lastname : None
+        - birthdate : None

@@ -62,8 +62,8 @@ if not modelDefinition is None and not templateDefinition is None:
     if templateDefinition.has_inputs():
         print "This template needs some inputs..."
         for input_key in templateDefinition.get_input_keys():
-            value = raw_input(key + ":\n")
-            templateDefinition.put_input(key, value)
+            value = raw_input(input_key + ":\n")
+            templateDefinition.put_input(input_key, value)
 
     fileGenerator = generator.Generator(modelDefinition, templateDefinition)
     fileGenerator.writeToDest(args.outputPath)

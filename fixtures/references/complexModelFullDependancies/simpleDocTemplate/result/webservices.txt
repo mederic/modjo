@@ -1,0 +1,24 @@
+Webservices 
+===============
+
+    Ws1
+    ------------------------
+    None
+    Params :
+        - test1 : None
+        - test2 : None
+        - test3 : None
+    Ws2
+    ------------------------
+    None
+    Params :
+        - test1 : None
+        - test2 : None
+        - test3 : None
+    Ws3
+    ------------------------
+    None
+    Params :
+        - test1 : None
+        - test2 : None
+        - test3 : None

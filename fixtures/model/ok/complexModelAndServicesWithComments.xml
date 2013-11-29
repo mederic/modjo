@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root model-name="complex model and services #1">
+	<models>
+		<model name="location">
+			<property type="double" name="latitude"/>
+			<property type="double" name="longitude"/>
+		</model>
+		<model name="person">
+			<property type="string" name="id"/>
+			<property type="string" name="firstname"/>
+			<property type="string" name="lastname"/>
+			<property type="date" name="birthdate"/>
+			<property type="boolean" name="isAMan"/>
+			<comment>
+			    A Person description
+			</comment>
+		</model>
+		<model name="shop">
+			<property type="string" name="id"/>
+			<property type="location" name="location"/>
+			<property type="person" name="owner"/>
+		</model>
+	</models>
+	<webservices>
+		<webservice name="getListShop">
+			<method>get</method>
+			<path>/shop</path>
+			<parameters>
+				<parameter type="double" name="latitude"/>
+				<parameter type="double" name="longitude"/>
+			</parameters>
+			<result>shop[]</result>
+			<comment>
+			    Retrieve shop list near a location
+			</comment>
+		</webservice>
+		<webservice name="addPerson">
+			<method>post</method>
+			<path>/person</path>
+			<parameters>
+				<parameter type="string" name="firstname" comment="cannot be null..."/>
+				<parameter type="string" name="lastname"/>
+				<parameter type="long" name="birthdate"/>
+			</parameters>
+			<result>string</result>
+		</webservice>
+		<webservice name="setShopOwner">
+			<method>put</method>
+			<path>/shop</path>
+			<parameters>
+				<parameter type="string" name="personId" comment="cannot be null..."/>
+				<parameter type="string" name="shopId"/>
+			</parameters>
+			<result>string</result>
+		</webservice>
+	</webservices>
+</root>
