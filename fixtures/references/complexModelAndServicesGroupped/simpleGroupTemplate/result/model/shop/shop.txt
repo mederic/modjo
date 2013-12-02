@@ -1,0 +1,7 @@
+Model name: shop
+Group: shop
+--------------------------
+Properties:
+    id <string>
+    location <location>
+    owner <person>

@@ -1,0 +1,7 @@
+Model name: person
+Group: None
+--------------------------
+Properties:
+    firstname <string>
+    lastname <string>
+    birthdate <date>

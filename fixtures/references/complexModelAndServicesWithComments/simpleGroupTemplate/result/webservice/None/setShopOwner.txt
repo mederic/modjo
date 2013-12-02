@@ -1,0 +1,6 @@
+Model name: setShopOwner
+Group: None
+--------------------------
+Properties:
+    personId <string>
+    shopId <string>

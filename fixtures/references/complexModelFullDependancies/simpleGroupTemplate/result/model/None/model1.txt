@@ -1,0 +1,5 @@
+Model name: model1
+Group: None
+--------------------------
+Properties:
+    test <double>

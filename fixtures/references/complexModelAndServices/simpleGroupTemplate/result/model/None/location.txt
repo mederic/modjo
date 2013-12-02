@@ -1,0 +1,6 @@
+Model name: location
+Group: None
+--------------------------
+Properties:
+    latitude <double>
+    longitude <double>

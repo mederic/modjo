@@ -108,7 +108,7 @@ class ModelOutput(AbstractOutput):
         AbstractOutput.__init__(self, output)
 
     def getFilenameParams(self):
-        return dict(model=self.model.name, Model=self.model.Name, MODEL=self.model.NAME, inputs=self.template.templateDefinition.inputs)
+        return dict(model=self.model.name, Model=self.model.Name, MODEL=self.model.NAME, group=self.model.group, Group=self.model.Group, GROUP=self.model.GROUP, inputs=self.template.templateDefinition.inputs)
         
     def getFileParams(self):
         return dict(model=self.model, equ=self.output.equivalences, inputs=self.template.templateDefinition.inputs)
@@ -136,7 +136,7 @@ class WebserviceOutput(AbstractOutput):
         AbstractOutput.__init__(self, output)
 
     def getFilenameParams(self):
-        return dict(webservice=self.webservice.name, Webservice=self.webservice.Name, WEBSERVICE=self.webservice.NAME, inputs=self.template.templateDefinition.inputs)
+        return dict(webservice=self.webservice.name, Webservice=self.webservice.Name, WEBSERVICE=self.webservice.NAME, group=self.webservice.group, Group=self.webservice.Group, GROUP=self.webservice.GROUP, inputs=self.template.templateDefinition.inputs)
         
     def getFileParams(self):
         return dict(webservice=self.webservice, equ=self.output.equivalences, inputs=self.template.templateDefinition.inputs)

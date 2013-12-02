@@ -1,0 +1,7 @@
+Model name: {{webservice.name}}
+Group: {{webservice.group}}
+--------------------------
+Properties:
+% for parameter in webservice.parameters:
+    {{parameter.name}} <{{parameter.dataType}}>
+% end

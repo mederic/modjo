@@ -1,0 +1,5 @@
+Model name: country
+Group: None
+--------------------------
+Properties:
+    cities <location[string]>

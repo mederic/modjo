@@ -1,0 +1,6 @@
+Model name: shop
+Group: None
+--------------------------
+Properties:
+    place <place>
+    owner <person>

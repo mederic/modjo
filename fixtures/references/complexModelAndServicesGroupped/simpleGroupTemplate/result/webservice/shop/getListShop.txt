@@ -1,0 +1,6 @@
+Model name: getListShop
+Group: shop
+--------------------------
+Properties:
+    latitude <double>
+    longitude <double>

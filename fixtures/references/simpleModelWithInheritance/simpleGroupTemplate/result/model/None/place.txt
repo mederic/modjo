@@ -1,0 +1,5 @@
+Model name: place
+Group: None
+--------------------------
+Properties:
+    name <string>

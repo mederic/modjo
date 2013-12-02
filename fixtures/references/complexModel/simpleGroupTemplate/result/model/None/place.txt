@@ -1,0 +1,6 @@
+Model name: place
+Group: None
+--------------------------
+Properties:
+    location <location>
+    name <string>

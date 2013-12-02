@@ -1,0 +1,5 @@
+Model name: getPerson
+Group: None
+--------------------------
+Properties:
+    id <string>

@@ -1,0 +1,6 @@
+Model name: location
+Group: shop
+--------------------------
+Properties:
+    latitude <double>
+    longitude <double>

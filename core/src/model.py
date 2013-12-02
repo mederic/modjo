@@ -124,6 +124,14 @@ class Model:
         self.Name = self.name[0].upper() + self.name[1:]
         self.NAME = self.name.upper()
 
+        self.group = xml_model.get('group')
+        if self.group is None:
+            self.Group = None
+            self.GROUP = None
+        else:
+            self.Group = self.group[0].upper() + self.group[1:]
+            self.GROUP = self.group.upper()
+            
         self.has_list = False
         self.has_map = False
 
@@ -147,7 +155,7 @@ class Property:
             raise ModjoSyntaxError("Property defined without a name.")
         self.Name = self.name[0].upper() + self.name[1:]
         self.NAME = self.name.upper()
-
+        
         self.dataType = xml_property.get('type')
         if self.dataType is None:
             raise ModjoSyntaxError("Property defined without a type.")
@@ -162,6 +170,14 @@ class Webservice:
         self.Name = self.name[0].upper() + self.name[1:]
         self.NAME = self.name.upper()
 
+        self.group = xml_webservice.get('group')
+        if self.group is None:
+            self.Group = None
+            self.GROUP = None
+        else:
+            self.Group = self.group[0].upper() + self.group[1:]
+            self.GROUP = self.group.upper()
+            
         self.has_list = False
         self.has_map = False
 

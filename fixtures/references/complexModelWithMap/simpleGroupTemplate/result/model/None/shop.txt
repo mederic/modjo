@@ -1,0 +1,7 @@
+Model name: shop
+Group: None
+--------------------------
+Properties:
+    owner <person>
+    employees <person[]>
+    customers <person[]>
