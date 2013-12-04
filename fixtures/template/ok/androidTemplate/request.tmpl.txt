@@ -50,7 +50,7 @@ abstract public class AbstractRequest<T> extends GoogleHttpClientSpiceRequest<T>
 
     public abstract String getPath();
     public abstract HttpMethod getHTTPMethod();
-    public abstract Map<String, Object> getVariables();
+    public abstract Map<String, Object> getVariables(boolean forCache);
 
 
     @Override
