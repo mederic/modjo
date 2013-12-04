@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root model-name="simple template #1">
+    <templates>
+        <template target="model-group" dir="model">
+	        <output name="{{Group}}Model.txt" src="model.tmpl.txt" dir="{{group}}"/>
+	    </template>
+        <template target="webservice-group" dir="webservice">
+	        <output name="{{Group}}Webservice.txt" src="webservice.tmpl.txt" dir="{{group}}"/>
+	    </template>
+    </templates>
+</root>

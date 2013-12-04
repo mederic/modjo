@@ -42,9 +42,15 @@ class TemplateGenerator:
             if (template.target == 'model'):
                 for model in modelDefinition.models:
                     self.outputs.append(ModelOutput(output, model, template))
+            elif (template.target == 'model-group'):
+                for model_group in modelDefinition.modelGroups.values():
+                    self.outputs.append(ModelGroupOutput(output, model_group, template))
             elif (template.target == 'webservice'):
                 for webservice in modelDefinition.webservices:
                     self.outputs.append(WebserviceOutput(output, webservice, template))
+            elif (template.target == 'webservice-group'):
+                for webservice_group in modelDefinition.webserviceGroups.values():
+                    self.outputs.append(WebserviceGroupOutput(output, webservice_group, template))
             elif (template.target == 'models'):
                 self.outputs.append(ModelsOutput(output, modelDefinition.models, template))
             elif (template.target == 'webservices'):
@@ -111,8 +117,25 @@ class ModelOutput(AbstractOutput):
         return dict(model=self.model.name, Model=self.model.Name, MODEL=self.model.NAME, group=self.model.group, Group=self.model.Group, GROUP=self.model.GROUP, inputs=self.template.templateDefinition.inputs)
         
     def getFileParams(self):
-        return dict(model=self.model, equ=self.output.equivalences, inputs=self.template.templateDefinition.inputs)
+        return dict(model=self.model, equ=self.output.equivalences, inputs=self.template.templateDefinition.inputs)        
         
+     
+class ModelGroupOutput(AbstractOutput):
+    
+    def __init__(self, output, modelsGroup, template):
+        self.template = template
+        self.models = modelsGroup
+        self.group = modelsGroup[0].group
+        self.Group = modelsGroup[0].Group
+        self.GROUP = modelsGroup[0].GROUP
+        AbstractOutput.__init__(self, output)
+
+    def getFilenameParams(self):
+        return dict(group=self.group, Group=self.Group, GROUP=self.GROUP, models=self.models, inputs=self.template.templateDefinition.inputs)
+        
+    def getFileParams(self):
+        return dict(group=self.group, Group=self.Group, GROUP=self.GROUP, models=self.models, equ=self.output.equivalences, inputs=self.template.templateDefinition.inputs)
+      
         
 class ModelsOutput(AbstractOutput):
 
@@ -141,7 +164,24 @@ class WebserviceOutput(AbstractOutput):
     def getFileParams(self):
         return dict(webservice=self.webservice, equ=self.output.equivalences, inputs=self.template.templateDefinition.inputs)
         
-           
+      
+class WebserviceGroupOutput(AbstractOutput):
+    
+    def __init__(self, output, webservicesGroup, template):
+        self.template = template
+        self.webservices = webservicesGroup
+        self.group = webservicesGroup[0].group
+        self.Group = webservicesGroup[0].Group
+        self.GROUP = webservicesGroup[0].GROUP
+        AbstractOutput.__init__(self, output)
+
+    def getFilenameParams(self):
+        return dict(group=self.group, Group=self.Group, GROUP=self.GROUP, webservices=self.webservices, inputs=self.template.templateDefinition.inputs)
+        
+    def getFileParams(self):
+        return dict(group=self.group, Group=self.Group, GROUP=self.GROUP, webservices=self.webservices, equ=self.output.equivalences, inputs=self.template.templateDefinition.inputs)
+        
+             
 class WebservicesOutput(AbstractOutput):
     
     def __init__(self, output, webservices, template):

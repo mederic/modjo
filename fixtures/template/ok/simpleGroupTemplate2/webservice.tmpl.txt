@@ -1,0 +1,6 @@
+Group : {{Group}}
+--------------------------
+Webservices:
+% for webservice in webservices:
+    {{webservice.name}}
+% end

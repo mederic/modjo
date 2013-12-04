@@ -27,12 +27,34 @@ class ModelDefinition:
                 raise ModjoSyntaxError("No model found.")
 
             self.check_types()
-
+            self.addGroups()
+            
         except ET.ParseError:
             raise XMLParseError(filePath)
         except AttributeError as attr_error:
             raise ModjoSyntaxError(str(attr_error))
 
+    def addGroups(self):
+        self.modelGroups = {}
+        self.modelUngroupped = []
+        for model in self.models:
+            if not model.group is None:
+                if not self.modelGroups.has_key(model.group):
+                    self.modelGroups[model.group] = []
+                self.modelGroups[model.group].append(model)
+            else:
+                self.modelUngroupped.append(model)
+                
+        self.webserviceGroups = {}
+        self.webserviceUngroupped = []
+        for webservice in self.webservices:
+            if not webservice.group is None:
+                if not self.webserviceGroups.has_key(webservice.group):
+                    self.webserviceGroups[webservice.group] = []
+                self.webserviceGroups[webservice.group].append(webservice)
+            else:
+                self.webserviceUngroupped.append(webservice)
+                
     def check_types(self):
         model_names = []
         models = {}
