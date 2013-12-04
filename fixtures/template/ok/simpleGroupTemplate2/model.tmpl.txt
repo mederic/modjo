@@ -1,0 +1,6 @@
+Group : {{Group}}
+--------------------------
+Models:
+% for model in models:
+    {{model.name}}
+% end
