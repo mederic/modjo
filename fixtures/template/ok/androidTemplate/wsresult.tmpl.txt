@@ -1,5 +1,7 @@
 package {{inputs['basepackage']}}.webservices.result;
 
+import {{inputs['basepackage']}}.webservices.SimpleResult;
+
 % if webservice.has_list:
 import java.util.List;
 % end

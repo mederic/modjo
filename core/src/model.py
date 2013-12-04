@@ -240,6 +240,14 @@ class Path:
         for entry in self.entries:
             final_str += '/' + entry.name
         return final_str
+        
+    def replace(self, str1, str2):
+        final_str = ''
+        for entry in self.entries:
+            final_str += '/' + entry.name.replace(str1, str2)
+        return final_str
+        
+        
 
 
 class PathEntry:

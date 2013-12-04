@@ -15,7 +15,7 @@ public class {{webservice.Name}}Request extends AbstractRequest<{{webservice.Nam
 % end
 
 	public {{webservice.Name}}Request(Context context) {
-		super(context, {{webservice.Name}}Result.class)
+		super(context, {{webservice.Name}}Result.class);
 	}
  
 % for parameter in webservice.parameters:
