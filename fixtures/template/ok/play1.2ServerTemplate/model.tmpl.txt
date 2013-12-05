@@ -1,0 +1,34 @@
+% if model.group is None:
+package controllers.api.results.models
+% else:
+package controllers.api.results.models.{{model.group}}
+% end
+
+% if model.has_list:
+import java.util.List;
+% end
+% if model.has_map:
+import java.util.Map;
+% end
+
+public class {{model.Name}} {
+
+% for property in model.properties:
+	private {{!equ.convert('java', property.dataType)}} {{property.name}};
+% end
+
+	public {{model.Name}}() {
+	} 
+	
+% for property in model.properties:
+	public {{!equ.convert('java', property.dataType)}} get{{property.Name}}() {
+		return this.{{property.name}};
+	}
+
+	public void set{{property.Name}}({{!equ.convert('java', property.dataType)}} {{property.name}}) {
+		this.{{property.name}} = {{property.name}};
+	}
+% end
+   
+}
+

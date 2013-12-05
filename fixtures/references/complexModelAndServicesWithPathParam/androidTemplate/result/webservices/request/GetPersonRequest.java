@@ -13,7 +13,7 @@ public class GetPersonRequest extends AbstractRequest<GetPersonResult> {
 	private String id;
 
 	public GetPersonRequest(Context context) {
-		super(context, GetPersonResult.class)
+		super(context, GetPersonResult.class);
 	}
  
 	public String getId() {

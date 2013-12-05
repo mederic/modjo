@@ -1,5 +1,7 @@
 package basepackage_default_value.webservices.result;
 
+import basepackage_default_value.webservices.SimpleResult;
+
 import java.util.List;
 import java.util.Map;
 

@@ -14,7 +14,7 @@ public class SetShopOwnerRequest extends AbstractRequest<SetShopOwnerResult> {
 	private String shopId;
 
 	public SetShopOwnerRequest(Context context) {
-		super(context, SetShopOwnerResult.class)
+		super(context, SetShopOwnerResult.class);
 	}
  
 	public String getPersonId() {

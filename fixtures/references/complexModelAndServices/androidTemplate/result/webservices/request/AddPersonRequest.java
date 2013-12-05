@@ -15,7 +15,7 @@ public class AddPersonRequest extends AbstractRequest<AddPersonResult> {
 	private long birthdate;
 
 	public AddPersonRequest(Context context) {
-		super(context, AddPersonResult.class)
+		super(context, AddPersonResult.class);
 	}
  
 	public String getFirstname() {

@@ -30,7 +30,7 @@ class Generator:
 
                 output_dest += output.name
                 f = open(output_dest, 'w')
-                f.write(output.content)
+                f.write(output.content.encode('utf-8'))
                 f.close()
 
 

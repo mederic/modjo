@@ -1,0 +1,14 @@
+# Routes
+# ~~~~
+
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#  Api Routes
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+GET         /shop                       api.Shop.getListShop
+
+POST         /person                       api.Person.addPerson
+
+PUT         /shop                       api.Shop.setShopOwner
+

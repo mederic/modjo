@@ -15,7 +15,7 @@ public class Ws1Request extends AbstractRequest<Ws1Result> {
 	private Map<Model4, Model3> test3;
 
 	public Ws1Request(Context context) {
-		super(context, Ws1Result.class)
+		super(context, Ws1Result.class);
 	}
  
 	public Model1 getTest1() {

@@ -14,7 +14,7 @@ public class GetListShopRequest extends AbstractRequest<GetListShopResult> {
 	private double longitude;
 
 	public GetListShopRequest(Context context) {
-		super(context, GetListShopResult.class)
+		super(context, GetListShopResult.class);
 	}
  
 	public double getLatitude() {
