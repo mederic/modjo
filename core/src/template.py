@@ -94,7 +94,7 @@ class Equivalences:
                 return result
             else:
                 result = equivalence.model_equivalence
-                result = result.replace("Model", dataType.capitalize())
+                result = result.replace("Model", dataType[0].upper() + dataType[1:])
                 result = result.replace("model", dataType)
                 return result
 
