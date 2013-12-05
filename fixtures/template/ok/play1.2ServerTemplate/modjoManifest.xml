@@ -43,18 +43,32 @@
             <list equivalence="java-object"><![CDATA[new ArrayList<type>();]]></list>
             <map equivalence="java-object"><![CDATA[new HashMap<key, value>();]]></map>
         </equivalence>
+        <equivalence name="str-default">
+            <string>default</string>
+            <date>2013-10-04</date>
+            <boolean>false</boolean>
+            <float>1.2</float>
+            <int>5</int>
+            <long>456</long>
+            <double>578</double>
+            <char>a</char>
+            <model>model</model>
+            <list>list</list>
+            <map>map</map>
+        </equivalence>
     </equivalences>
     <templates>
-        <template target="model" dir="results/models">
+        <template target="model" dir="api/results/models">
             <output name="WSModel{{Model}}.java" src="model.tmpl.txt" dir="{{group}}" />
         </template>
         <template target="webservice-group">
-            <output name="{{Group}}.java" src="webserviceGroup.tmpl.txt" />
+            <output name="{{Group}}.java" src="webserviceGroup.tmpl.txt" dir="api" />
+            <output name="{{Group}}.java" src="webserviceGroupTest.tmpl.txt" dir="test/functionnal/api" />
         </template>   
         <template target="webservices">
             <output name="routes" src="routes.tmpl.txt" dir="conf"/>
         </template>
-        <template>
+        <template dir="api">
             <output name="WSResultCode.java" src="wsResultCode.tmpl.txt" dir="results"/>
             <output name="WSResult.java" src="wsResult.tmpl.txt" dir="results"/>
         </template>
