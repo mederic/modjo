@@ -7,8 +7,5 @@
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 GET         /shop                       api.None.getListShop
-
 POST         /person                       api.None.addPerson
-
 PUT         /shop                       api.None.setShopOwner
-

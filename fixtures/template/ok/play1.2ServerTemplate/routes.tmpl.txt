@@ -8,5 +8,4 @@
 
 % for webservice in webservices:
 {{webservice.METHOD}}         {{webservice.path}}                       api.{{webservice.Group}}.{{webservice.name}}
-
 % end

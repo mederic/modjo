@@ -7,8 +7,5 @@
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 POST         /person                       api.None.addPerson
-
 GET         /person/id                       api.None.getPerson
-
 PUT         /person/id                       api.None.editPerson
-
