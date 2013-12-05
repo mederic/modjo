@@ -1,7 +1,9 @@
 package {{inputs['basepackage']}}.webservices.result;
 
 import {{inputs['basepackage']}}.webservices.SimpleResult;
-
+% for depending_model in webservice.depending_models:
+import {{inputs['basepackage']}}.models.{{depending_model.Name}};
+% end
 % if webservice.has_list:
 import java.util.List;
 % end

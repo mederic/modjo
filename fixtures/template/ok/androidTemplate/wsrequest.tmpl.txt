@@ -4,7 +4,9 @@ import android.content.Context;
 import {{inputs['basepackage']}}.webservices.AbstractRequest;
 import {{inputs['basepackage']}}.webservices.AbstractRequest.HttpMethod;
 import {{inputs['basepackage']}}.webservices.result.{{webservice.Name}}Result;
-
+% for depending_model in webservice.depending_models:
+import {{inputs['basepackage']}}.models.{{depending_model.Name}};
+% end
 import java.util.HashMap;
 import java.util.Map;
 
@@ -53,7 +55,7 @@ public class {{webservice.Name}}Request extends AbstractRequest<{{webservice.Nam
 	}	
 	
 	@Override
-	public Map<String, Object> getVariables() {
+	public Map<String, Object> getVariables(boolean forCache) {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 % for parameter in webservice.parameters:
     % if not parameter.is_in_path:
