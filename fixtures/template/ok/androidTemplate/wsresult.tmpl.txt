@@ -11,6 +11,9 @@ import java.util.List;
 import java.util.Map;
 % end
 
+/**
+ * Created by Modjo
+ */
 public class {{webservice.Name}}Result extends SimpleResult<{{!equ.convert('java', webservice.result)}}> {
 
 }

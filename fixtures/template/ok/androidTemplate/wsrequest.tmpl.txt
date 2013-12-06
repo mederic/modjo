@@ -10,6 +10,9 @@ import {{inputs['basepackage']}}.models.{{depending_model.Name}};
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Created by Modjo
+ */
 public class {{webservice.Name}}Request extends AbstractRequest<{{webservice.Name}}Result> {
 
 % for parameter in webservice.parameters:
