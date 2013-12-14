@@ -2,6 +2,10 @@ package basepackage_default_value.models;
 
 import java.util.Map;
 
+
+/**
+ * Created by Modjo
+ */
 public class Country {
 
 	private Map<String, Location> cities;

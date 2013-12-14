@@ -2,6 +2,10 @@ package basepackage_default_value.models;
 
 import java.util.List;
 
+
+/**
+ * Created by Modjo
+ */
 public class Shop {
 
 	private Place place;

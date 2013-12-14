@@ -5,6 +5,7 @@ import sys
 from core.src import model
 from core.src import template
 from core.src import generator
+from core.src.downloader import *
 
 from core.src.error import *
 
@@ -27,9 +28,11 @@ parser.add_argument('-m', '--model', action="store", dest="modelPath", default=N
 parser.add_argument('-t', '--template', action="store", dest="templatePath", default=None, help='path to the folder container files describing the template')
 parser.add_argument('-o', '--output', action="store", dest="outputPath",
 default='modjoResult', help='path to the directory where result file(s) will be created')
-parser.add_argument('-c', '--check', action="store_true", dest="checkMode", help='validate (or not) a template and/or a model')
 
 args = parser.parse_args()
+
+# TODO read modjo.cfg
+# check if valid
 
 if not args.checkMode:
     if args.modelPath is None:
@@ -54,7 +57,9 @@ if not args.modelPath is None:
 
 if not args.templatePath is None:
     try:
-        templateDefinition = template.TemplateDefinition(args.templatePath)
+        downloader = TemplateDownloader(args.templatePath)
+        local_path = downloader.getLocalPath()
+        templateDefinition = template.TemplateDefinition(local_path)
     except ModjoSyntaxError as modjoSynError:
         print "Incorrect template: " + modjoSynError.reason
 

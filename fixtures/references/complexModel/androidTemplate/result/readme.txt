@@ -14,3 +14,11 @@ dependencies {
 
     compile 'org.codehaus.jackson:jackson-mapper-asl:1.9.9'
 }
+
+
+then, add this to AndroidManifest.xml:
+
+ <service
+	android:name="[PACKAGE_NAME].JsonSpiceService"
+        android:exported="false" >
+</service>

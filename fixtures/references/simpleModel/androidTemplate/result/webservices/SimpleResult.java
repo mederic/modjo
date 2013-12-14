@@ -2,6 +2,9 @@ package basepackage_default_value.webservices;
 
 import com.google.api.client.util.Key;
 
+/**
+ * Created by Modjo
+ */
 public class SimpleResult<E> {
 
     @Key

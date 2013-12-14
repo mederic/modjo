@@ -4,10 +4,13 @@ import android.content.Context;
 import basepackage_default_value.webservices.AbstractRequest;
 import basepackage_default_value.webservices.AbstractRequest.HttpMethod;
 import basepackage_default_value.webservices.result.GetPersonResult;
-
+import basepackage_default_value.models.Person;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Created by Modjo
+ */
 public class GetPersonRequest extends AbstractRequest<GetPersonResult> {
 
 	private String id;
@@ -41,7 +44,7 @@ public class GetPersonRequest extends AbstractRequest<GetPersonResult> {
 	}	
 	
 	@Override
-	public Map<String, Object> getVariables() {
+	public Map<String, Object> getVariables(boolean forCache) {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		return map;
 	}

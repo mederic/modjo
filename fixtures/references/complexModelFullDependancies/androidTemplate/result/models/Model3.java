@@ -1,6 +1,10 @@
 package basepackage_default_value.models;
 
 
+
+/**
+ * Created by Modjo
+ */
 public class Model3 {
 
 	private double test;

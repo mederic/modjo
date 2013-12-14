@@ -4,10 +4,17 @@ import android.content.Context;
 import basepackage_default_value.webservices.AbstractRequest;
 import basepackage_default_value.webservices.AbstractRequest.HttpMethod;
 import basepackage_default_value.webservices.result.Ws1Result;
-
+import basepackage_default_value.models.Model5;
+import basepackage_default_value.models.Model1;
+import basepackage_default_value.models.Model2;
+import basepackage_default_value.models.Model4;
+import basepackage_default_value.models.Model3;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Created by Modjo
+ */
 public class Ws1Request extends AbstractRequest<Ws1Result> {
 
 	private Model1 test1;
@@ -52,7 +59,7 @@ public class Ws1Request extends AbstractRequest<Ws1Result> {
 	}	
 	
 	@Override
-	public Map<String, Object> getVariables() {
+	public Map<String, Object> getVariables(boolean forCache) {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("test1", this.test1);
 		map.put("test2", this.test2);

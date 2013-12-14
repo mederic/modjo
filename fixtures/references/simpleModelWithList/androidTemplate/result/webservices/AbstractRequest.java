@@ -1,5 +1,8 @@
 package basepackage_default_value.webservices;
 
+import android.content.Context;
+import android.util.Log;
+
 import com.google.api.client.http.GenericUrl;
 import com.google.api.client.http.HttpRequest;
 import com.google.api.client.http.HttpResponse;
@@ -13,6 +16,9 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Created by Modjo
+ */
 abstract public class AbstractRequest<T> extends GoogleHttpClientSpiceRequest<T> {
 	
     private static final String TAG = AbstractRequest.class.getName();
@@ -24,10 +30,9 @@ abstract public class AbstractRequest<T> extends GoogleHttpClientSpiceRequest<T>
 		DELETE
 	}
 
-    private final Context context;
 
     public AbstractRequest(Context context, Class<T> target) {
-        this(context, target, false);
+        super(target);
     }
 
     private String constructUrl() {

@@ -1,6 +1,10 @@
 package basepackage_default_value.models;
 
 
+
+/**
+ * Created by Modjo
+ */
 public class Person {
 
 	private String id;

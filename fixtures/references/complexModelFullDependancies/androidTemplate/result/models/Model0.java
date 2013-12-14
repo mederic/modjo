@@ -3,6 +3,10 @@ package basepackage_default_value.models;
 import java.util.List;
 import java.util.Map;
 
+
+/**
+ * Created by Modjo
+ */
 public class Model0 {
 
 	private Model1 test1;
