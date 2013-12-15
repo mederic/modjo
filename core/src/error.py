@@ -4,7 +4,7 @@ class ModjoSyntaxError(Exception):
         self.reason = reason
 
     def __str__(self):
-        return "Uncorrect syntax : " + reason
+        return "Uncorrect syntax : " + self.reason
 
 class ModjoTemplateError(Exception):
 
@@ -12,7 +12,7 @@ class ModjoTemplateError(Exception):
         self.reason = reason
 
     def __str__(self):
-        return "Uncorrect template : " + reason
+        return "Invalid template : " + self.reason
 
 class XMLParseError(Exception):
 
@@ -21,3 +21,21 @@ class XMLParseError(Exception):
 
     def __str__(self):
         return filePath + " is not a valid xml file..."
+
+
+class ModjoDownloaderError(Exception):
+
+    def __init__(self, reason):
+        self.reason = reason
+
+    def __str__(self):
+        return 'Cannot download template: ' + self.reason
+
+
+class ModjoConfigError(Exception):
+
+    def __init__(self, reason):
+        self.reason = reason
+
+    def __str__(self):
+        return 'Invalid config file: ' + self.reason
