@@ -37,7 +37,12 @@ public class {{Group}}Test extends FunctionalTest {
         % end
         
         String params = "{{body}}&app_key=API_APP_KEY";
-        Response response = {{webservice.METHOD}}("{{webservice.path}}?" + params);
+        % if webservice.method == 'put':         
+        Request request = newRequest();       
+        Response response = PUT(request, "{{webservice.path}}", "application/x-www-form-urlencoded", params);
+        % else:
+        Response response = {{webservice.METHOD}}("{{webservice.path}}?" + params);        
+        % end
         assertIsOk(response);
         
         String responseBody = response.out.toString();

@@ -281,7 +281,6 @@ class PathEntry:
             
             existing_parameter = False
             for parameter in webservice.parameters:
-                print self.name + ' vs ' + parameter.name
                 if self.name == parameter.name:
                     existing_parameter = True
                     parameter.is_in_path = True

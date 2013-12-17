@@ -1,7 +1,7 @@
 % if model.group is None:
-package controllers.api.results.models
+package controllers.api.results.models;
 % else:
-package controllers.api.results.models.{{model.group}}
+package controllers.api.results.models.{{model.group}};
 % end
 
 % if model.has_list:
@@ -11,13 +11,13 @@ import java.util.List;
 import java.util.Map;
 % end
 
-public class {{model.Name}} {
+public class WS{{model.Name}} {
 
 % for property in model.properties:
 	private {{!equ.convert('java', property.dataType)}} {{property.name}};
 % end
 
-	public {{model.Name}}() {
+	public WS{{model.Name}}() {
 	} 
 	
 % for property in model.properties:

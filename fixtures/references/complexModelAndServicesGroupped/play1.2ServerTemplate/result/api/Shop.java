@@ -7,6 +7,7 @@ import controllers.auth.Secure;
 import controllers.auth.SecureAnnotations.Protected;
 import controllers.auth.SecureAnnotations.IsAPI;
 import java.util.HashMap;
+import java.util.ArrayList;
 import play.i18n.Messages;
 import play.mvc.Controller;
 import play.mvc.With;
@@ -24,7 +25,7 @@ public class Shop extends Controller {
      
         public static void getListShop(double latitude, double longitude) {        
             // detailled result...
-            ArrayList<Shop> objectResult = new ArrayList<Shop>();
+            ArrayList<WSShop> objectResult = new ArrayList<WSShop>();
         
             // Final result...
             WSResult result = new WSResult();

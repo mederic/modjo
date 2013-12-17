@@ -23,7 +23,7 @@ class Generator:
         for sub_generator in self.template_generator:
             for output in sub_generator.outputs:
                 output_dest = dest + "/" 
-                if not output.output_dir is None:
+                if not output.output_dir is None and len(output.output_dir) > 0:
                    output_dest += output.output_dir + "/"
                    if not os.path.exists(output_dest):
                         os.makedirs(output_dest)
@@ -87,6 +87,9 @@ class AbstractOutput:
         if not self.output.output_dir is None and not self.output.output_dir == '':
             output_dir_tpl = SimpleTemplate(self.output.output_dir)
             output_dir = output_dir_tpl.render(self.getFilenameParams())
+          
+        if output_dir == '':
+            output_dir = None
             
         self.output_dir = output_dir            
         self.name = filename

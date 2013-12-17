@@ -13,7 +13,7 @@
             <long>long</long>
             <double>double</double>
             <char>char</char>
-            <model>Model</model>
+            <model>WSModel</model>
             <list equivalence="java-object"><![CDATA[ArrayList<type>]]></list>
             <map equivalence="java-object"><![CDATA[Map<key, value>]]></map>
         </equivalence>
@@ -26,7 +26,7 @@
             <long>Long</long>
             <double>Double</double>
             <char>Char</char>
-            <model>Model</model>
+            <model>WSModel</model>
             <list><![CDATA[ArrayList<type>]]></list>
             <map><![CDATA[Map<key, value>]]></map>
         </equivalence>
@@ -39,7 +39,7 @@
             <long>456;</long>
             <double>578;</double>
             <char>'a';</char>
-            <model>new Model();</model>
+            <model>new WSModel();</model>
             <list equivalence="java-object"><![CDATA[new ArrayList<type>();]]></list>
             <map equivalence="java-object"><![CDATA[new HashMap<key, value>();]]></map>
         </equivalence>
@@ -59,11 +59,11 @@
     </equivalences>
     <templates>
         <template target="model" dir="api/results/models">
-            <output name="WSModel{{Model}}.java" src="model.tmpl.txt" dir="{{group}}" />
+            <output name="WS{{Model}}.java" src="model.tmpl.txt" dir="{{group}}" />
         </template>
         <template target="webservice-group">
             <output name="{{Group}}.java" src="webserviceGroup.tmpl.txt" dir="api" />
-            <output name="{{Group}}.java" src="webserviceGroupTest.tmpl.txt" dir="test/functionnal/api" />
+            <output name="{{Group}}Test.java" src="webserviceGroupTest.tmpl.txt" dir="test/functionnal/api" />
         </template>   
         <template target="webservices">
             <output name="routes" src="routes.tmpl.txt" dir="conf"/>
