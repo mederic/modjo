@@ -75,5 +75,5 @@ class TemplateDownloader:
         str_progress = '  [{0}] {1}%'.format('=' * (int_progress / 5), int_progress)
         sys.stdout.write('\r' + str_progress)
 
-    def getLocalPath(self):
+    def get_local_path(self):
         return self.local_path

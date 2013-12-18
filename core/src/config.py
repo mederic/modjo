@@ -15,7 +15,7 @@ class Config:
             raise ModjoConfigError('missing \'default_output\' in default section...')
 
         if not os.path.exists(self.template_folder):
-            os.makedirs(self.template_folder)
+            raise ModjoConfigError('template folder \'' + self.template_folder + '\' not exists...')
 
         self.repos = {}
         for repos in config.items('repos'):

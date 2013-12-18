@@ -9,6 +9,7 @@ from core.src import generator
 from core.src.downloader import *
 from core.src.error import *
 from core.src.config import *
+import shutil
 
 
 print("\n\
@@ -27,7 +28,8 @@ parser = argparse.ArgumentParser(description='Modjo - model generator')
 parser.add_argument('-m', '--model', action="store", dest="modelPath", default=None, help='path to the file describing the model')
 parser.add_argument('-t', '--template', action="store", dest="templatePath", default=None, help='path to the folder container files describing the template')
 parser.add_argument('-o', '--output', action="store", dest="outputPath",
-default='modjoResult', help='path to the directory where result file(s) will be created')
+default=None, help='path to the directory where result file(s) will be created')
+
 
 config = None
 base_dir = os.path.dirname(__file__)
@@ -41,6 +43,19 @@ except:
     sys.exit(2)
 
 args = parser.parse_args()
+
+
+if args.outputPath is None:
+    args.outputPath = config.default_output
+
+if os.path.exists(args.outputPath):
+    print "Destination output already exist..."
+    msg = "Would you like to overwrite '" + args.outputPath + "'? [N,y]"
+    value = raw_input(msg + '\n')
+    if value == 'y' or value == 'Y':
+        shutil.rmtree(args.outputPath)
+    else:
+        sys.exit(2)
 
 if args.modelPath is None:
     print("Path to the model is missing (option -m)")
@@ -65,7 +80,7 @@ if not args.modelPath is None:
 if not args.templatePath is None:
     try:
 	downloader = TemplateDownloader(args.templatePath, config)
-	local_path = downloader.getLocalPath()
+	local_path = downloader.get_local_path()
         templateDefinition = template.TemplateDefinition(local_path)
     except ModjoSyntaxError as modjoSynError:
         print "Incorrect template: " + modjoSynError.reason
