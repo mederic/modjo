@@ -1,6 +1,0 @@
-Model name: setShopOwner
-Group: shop
---------------------------
-Properties:
-    personId <string>
-    shopId <string>

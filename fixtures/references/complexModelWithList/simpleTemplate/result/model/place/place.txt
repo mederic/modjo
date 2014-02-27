@@ -1,5 +1,0 @@
-Model name: place
---------------------------
-Properties:
-    location <location>
-    name <string>

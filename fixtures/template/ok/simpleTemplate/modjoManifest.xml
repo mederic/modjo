@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<root model-name="simple template #1">
-    <templates>
-        <template target="model" dir="model">
-	    <output name="{{model}}.txt" src="model.tmpl.txt" dir="{{model}}"/>
-	</template>
-    </templates>
-</root>

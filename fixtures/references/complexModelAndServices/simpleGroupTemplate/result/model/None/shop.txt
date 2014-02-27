@@ -1,7 +1,0 @@
-Model name: shop
-Group: None
---------------------------
-Properties:
-    id <string>
-    location <location>
-    owner <person>

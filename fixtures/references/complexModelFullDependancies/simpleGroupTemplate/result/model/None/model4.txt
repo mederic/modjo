@@ -1,5 +1,0 @@
-Model name: model4
-Group: None
---------------------------
-Properties:
-    test <double>

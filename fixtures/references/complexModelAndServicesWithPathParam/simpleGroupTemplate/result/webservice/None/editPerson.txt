@@ -1,8 +1,0 @@
-Model name: editPerson
-Group: None
---------------------------
-Properties:
-    firstname <string>
-    id <string>
-    lastname <string>
-    birthdate <long>

@@ -1,7 +1,0 @@
-Model name: addPerson
-Group: None
---------------------------
-Properties:
-    firstname <string>
-    lastname <string>
-    birthdate <long>

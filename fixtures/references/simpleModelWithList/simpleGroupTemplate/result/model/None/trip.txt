@@ -1,7 +1,0 @@
-Model name: trip
-Group: None
---------------------------
-Properties:
-    from <date>
-    to <date>
-    location <location>

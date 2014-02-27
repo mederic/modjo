@@ -1,8 +1,0 @@
-Models 
-===============
-
-% for model in models:
-    {{model.Name}}
-    ------------------------
-    {{model.comment}}
-% end

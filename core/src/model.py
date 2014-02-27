@@ -80,11 +80,13 @@ class ModelDefinition:
                     model.depending_models.add(models[model_property.dataType])
                 elif utils.is_a_list(model_property.dataType):
                     model.has_list = True
+                    model_property.is_list = True
                     baseType = model_property.dataType.split('[')[0];
                     if baseType in model_names:
                         model.depending_models.add(models[baseType])
                 elif utils.is_a_map(model_property.dataType):
                     model.has_map = True
+                    model_property.is_map = True
                     baseType = model_property.dataType.split('[')[0];
                     keyType = model_property.dataType.replace(baseType, '')
                     keyType = keyType.replace('[', '')
@@ -122,12 +124,14 @@ class ModelDefinition:
                 elif parameter.dataType in model_names:
                     service.depending_models.add(models[parameter.dataType])
                 elif utils.is_a_list(parameter.dataType):
-                    service.has_list = True
+                    service.has_list = True            	
+                    parameter.is_list = True
                     baseType = parameter.dataType.split('[')[0];
                     if baseType in model_names:
                         service.depending_models.add(models[baseType])
                 elif utils.is_a_map(parameter.dataType):
                     service.has_map = True
+                    parameter.is_map = True
                     baseType = parameter.dataType.split('[')[0];
                     keyType = parameter.dataType.replace(baseType, '')
                     keyType = keyType.replace('[', '')
@@ -177,6 +181,8 @@ class Property:
             raise ModjoSyntaxError("Property defined without a name.")
         self.Name = self.name[0].upper() + self.name[1:]
         self.NAME = self.name.upper()
+        self.is_list = False
+        self.is_map = False
         
         self.dataType = xml_property.get('type')
         if self.dataType is None:
@@ -305,6 +311,8 @@ class Parameter:
             raise ModjoSyntaxError("Webservice parameter defined without a name.")
         self.Name = self.name[0].upper() + self.name[1:]
         self.NAME = self.name.upper()
+        self.is_list = False
+        self.is_map = False
 
         self.dataType = xml_parameter.get('type')
         if self.dataType is None:

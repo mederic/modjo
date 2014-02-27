@@ -1,9 +1,0 @@
-Model name: person
-Group: None
---------------------------
-Properties:
-    id <string>
-    firstname <string>
-    lastname <string>
-    birthdate <date>
-    isAMan <boolean>

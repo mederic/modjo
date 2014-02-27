@@ -1,6 +1,0 @@
-Model name: company
-Group: None
---------------------------
-Properties:
-    ceo <person>
-    shops <shop[]>

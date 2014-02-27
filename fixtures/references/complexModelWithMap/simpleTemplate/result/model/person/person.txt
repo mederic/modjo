@@ -1,6 +1,0 @@
-Model name: person
---------------------------
-Properties:
-    firstname <string>
-    lastname <string>
-    birthdate <date>

@@ -1,4 +1,0 @@
-Model name: model1
---------------------------
-Properties:
-    test <double>

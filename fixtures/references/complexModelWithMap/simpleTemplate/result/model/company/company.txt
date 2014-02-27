@@ -1,5 +1,0 @@
-Model name: company
---------------------------
-Properties:
-    ceo <person>
-    shops <shop[location]>

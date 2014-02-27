@@ -1,4 +1,0 @@
-Model name: trips
---------------------------
-Properties:
-    locations <trip[]>

@@ -1,4 +1,0 @@
-Model name: country
---------------------------
-Properties:
-    cities <location[string]>

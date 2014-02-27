@@ -1,5 +1,0 @@
-Group : Shop
---------------------------
-Models:
-    location
-    shop
